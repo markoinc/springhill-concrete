@@ -1,10 +1,12 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { business, services } from '../../data/business';
+import { business, services, reviews } from '../../data/business';
 
 const service = services.find(s => s.slug === 'concrete-driveways')!;
 const title = `Concrete Driveway Contractors Spring Hill FL | ${business.name}`;
-const description = `Expert concrete driveway contractors in Spring Hill, FL. New driveways, resurfacing, repairs. 4" thick, 4000 PSI concrete. Call ${business.phone} for free estimate.`;
+const description = `Expert concrete driveway installation in Spring Hill, FL. New driveways, resurfacing, repairs. 4" thick, 4000+ PSI concrete. Licensed & insured. Call ${business.phone} for free estimate.`;
+
+const relatedReviews = reviews.filter(r => r.service.toLowerCase().includes('driveway'));
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -15,7 +17,7 @@ const faqSchema = {
       "name": "How much does a concrete driveway cost in Spring Hill, FL?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Concrete driveway costs in Spring Hill range from $8-$15 per square foot. A standard 400 sq ft single-car driveway costs $3,200-$6,000. Two-car driveways (600 sq ft) cost $4,800-$9,000. Stamped driveways cost 40-60% more."
+        "text": "Concrete driveway costs in Spring Hill range from $8-$15 per square foot for standard finishes. A typical 400 sq ft single-car driveway costs $3,200-$6,000. Two-car driveways (600+ sq ft) cost $4,800-$9,000+. Stamped or decorative concrete adds 40-60% to the base price."
       }
     },
     {
@@ -23,7 +25,7 @@ const faqSchema = {
       "name": "How thick should a concrete driveway be in Florida?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "A residential driveway should be 4 inches thick minimum for cars and light trucks. For RVs, boats, or heavy vehicles, we recommend 5-6 inches. We use 4,000 PSI concrete with wire mesh or fiber reinforcement."
+        "text": "A residential driveway should be 4 inches thick minimum for passenger cars and light trucks. For RVs, boats on trailers, or heavy vehicles, we recommend 5-6 inches with additional rebar reinforcement. All our driveways use 4,000+ PSI concrete."
       }
     },
     {
@@ -31,133 +33,314 @@ const faqSchema = {
       "name": "How long until I can drive on my new concrete driveway?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Wait 7 days before driving passenger vehicles on new concrete. Heavy vehicles should wait 28 days. You can walk on it after 24-48 hours. Florida's warm climate helps concrete cure faster."
+        "text": "Wait at least 7 days before driving passenger vehicles on new concrete. Heavy vehicles (trucks, RVs) should wait the full 28 days for concrete to reach maximum strength. You can walk on it after 24-48 hours. Florida's warm climate accelerates curing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is concrete better than asphalt for driveways in Florida?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Concrete is generally the better choice for Florida driveways. It lasts 30+ years vs 15-20 for asphalt, handles heat better without softening, requires less maintenance (no resealing), and reflects sunlight to stay cooler. The upfront cost is slightly higher but long-term value is better."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a permit for a new driveway in Hernando County?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, most new driveways and driveway replacements in Hernando County require a permit from the Building Department, especially if connecting to a public right-of-way. Spring Hill Concrete Co. handles all permitting paperwork and inspections for our customers."
       }
     }
   ]
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Concrete Driveway Installation",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": business.name,
+    "telephone": business.phone
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Spring Hill, FL"
+  },
+  "description": service.description
 };
 ---
 
 <Layout title={title} description={description}>
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
   </Fragment>
 
-  <section class="bg-gradient-to-br from-dark to-dark-deep py-16 text-white text-center">
-    <div class="max-w-4xl mx-auto px-5">
-      <h1 class="text-4xl font-bold mb-4">Concrete Driveway Contractors</h1>
-      <p class="text-lg text-gray-300 mb-6">Professional driveway installation in Spring Hill, FL and Hernando County</p>
-      <a href={business.phoneLink} class="inline-flex items-center gap-3 bg-primary text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary-dark transition">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
-        Call {business.phone}
-      </a>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-dark to-dark-deep py-16 text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-[url('/images/driveway-bighouse.webp')] opacity-20 bg-cover bg-center"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-dark/95 to-dark/80"></div>
+    <div class="max-w-4xl mx-auto px-5 text-center relative z-10">
+      <span class="inline-block bg-primary/20 border border-primary/30 text-primary px-4 py-1 rounded-full text-sm font-medium mb-4">Our Most Popular Service</span>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Concrete Driveway Contractors</h1>
+      <p class="text-lg text-gray-300 mb-6 max-w-2xl mx-auto">Professional driveway installation, replacement, and repair in Spring Hill, FL and throughout Hernando County. Built to last 30+ years.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={business.phoneLink} class="inline-flex items-center justify-center gap-3 bg-primary hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition shadow-lg">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+          {business.phone}
+        </a>
+        <a href="/contact/" class="inline-flex items-center justify-center gap-2 border-2 border-white/50 text-white px-8 py-4 rounded-xl font-bold hover:bg-white hover:text-dark transition">
+          Get Free Estimate
+        </a>
+      </div>
     </div>
   </section>
 
+  <!-- Trust Bar -->
+  <section class="bg-gray-50 py-4 border-b">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="flex flex-wrap justify-center items-center gap-6 text-sm">
+        <span class="flex items-center gap-2"><svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Licensed & Insured</span>
+        <span class="flex items-center gap-2"><svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 5.0 Rating</span>
+        <span class="flex items-center gap-2"><svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg> {business.yearsExperience}+ Years</span>
+        <span class="flex items-center gap-2"><svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg> Free Estimates</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
   <section class="py-16 bg-white">
     <div class="max-w-4xl mx-auto px-5">
       <div class="prose prose-lg max-w-none">
-        <h2 class="text-2xl font-bold text-dark mb-4">Expert Concrete Driveway Installation in Spring Hill</h2>
-        <p class="text-gray-600 mb-6">
-          A quality concrete driveway is one of the best investments you can make in your Spring Hill home. Not only does it boost curb appeal, but a properly installed driveway lasts 30+ years with minimal maintenance. At {business.name}, we specialize in durable, beautiful concrete driveways built to withstand Florida's heat and occasional storms.
+        <h2 class="text-3xl font-bold text-dark mb-6">Expert Concrete Driveway Installation in Spring Hill, FL</h2>
+        
+        <p class="text-gray-600 text-lg leading-relaxed">
+          A quality concrete driveway is one of the smartest investments you can make in your Spring Hill home. Not only does it dramatically boost your curb appeal, but a properly installed concrete driveway will last 30+ years with minimal maintenance—far outlasting asphalt alternatives. At {business.name}, we've been installing durable, beautiful concrete driveways throughout Hernando County for over {business.yearsExperience} years.
         </p>
 
-        <h3 class="text-xl font-bold text-dark mb-3">Our Driveway Services Include:</h3>
-        <ul class="grid md:grid-cols-2 gap-3 mb-8 list-none pl-0">
-          {service.features.map(f => (
-            <li class="flex items-center gap-2 bg-gray-50 p-3 rounded-lg">
-              <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              {f}
-            </li>
-          ))}
-        </ul>
+        <p class="text-gray-600 leading-relaxed">
+          Whether you need a new driveway for a recent home purchase, want to replace an aging cracked driveway, or are looking to extend your existing driveway for additional parking, our experienced crews deliver professional results you'll be proud of for decades. We handle everything from permits to final cleanup, making the process simple and stress-free.
+        </p>
 
-        <h3 class="text-xl font-bold text-dark mb-3">Why Choose Concrete for Your Driveway?</h3>
-        <div class="grid md:grid-cols-2 gap-6 mb-8">
-          <div class="bg-gray-50 p-5 rounded-lg">
-            <h4 class="font-bold mb-2">Durability</h4>
-            <p class="text-gray-600 text-sm">Concrete driveways last 30+ years vs. 15-20 for asphalt. Less maintenance required.</p>
+        <h3 class="text-2xl font-bold text-dark mt-10 mb-4">Our Driveway Installation Process</h3>
+        
+        <p class="text-gray-600 leading-relaxed">
+          Every driveway project we complete follows a proven process developed over hundreds of installations. It starts with a thorough assessment of your property, including soil conditions, drainage patterns, and existing structures. Spring Hill's sandy soil and high water table require special attention during preparation—something contractors unfamiliar with our area often overlook.
+        </p>
+
+        <div class="bg-gray-50 rounded-xl p-6 my-8">
+          <h4 class="font-bold text-lg mb-4">What's Included in Every Driveway:</h4>
+          <ul class="grid md:grid-cols-2 gap-3 list-none pl-0 m-0">
+            {service.features.map(f => (
+              <li class="flex items-start gap-3 text-gray-700">
+                <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                {f}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <h3 class="text-2xl font-bold text-dark mt-10 mb-4">Why Concrete is the Best Choice for Florida Driveways</h3>
+        
+        <p class="text-gray-600 leading-relaxed">
+          Florida homeowners have unique considerations when choosing driveway materials. Our intense summer heat, frequent rain, sandy soil conditions, and occasional tropical weather all impact how driveways perform over time. Here's why concrete remains the preferred choice for discerning Spring Hill homeowners:
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-6 my-8">
+          <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+            <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+              <span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary">30+</span>
+              Year Lifespan
+            </h4>
+            <p class="text-gray-600 text-sm">Properly installed concrete driveways last 30+ years—twice as long as asphalt. Many driveways we've installed 15+ years ago still look excellent with minimal maintenance.</p>
           </div>
-          <div class="bg-gray-50 p-5 rounded-lg">
-            <h4 class="font-bold mb-2">Curb Appeal</h4>
-            <p class="text-gray-600 text-sm">Clean, professional appearance. Multiple finish options available.</p>
+          <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+            <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+              <span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary">☀️</span>
+              Heat Resistant
+            </h4>
+            <p class="text-gray-600 text-sm">Unlike asphalt, concrete won't soften in Florida's 90°+ temperatures. No tire marks, no sticky surface, no worrying about your trailer tongue jack sinking in.</p>
           </div>
-          <div class="bg-gray-50 p-5 rounded-lg">
-            <h4 class="font-bold mb-2">Low Maintenance</h4>
-            <p class="text-gray-600 text-sm">No resealing required like asphalt. Easy to clean with a pressure washer.</p>
+          <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+            <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+              <span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary">🔧</span>
+              Low Maintenance
+            </h4>
+            <p class="text-gray-600 text-sm">No annual sealing required like asphalt. Occasional pressure washing is all you need. Saves hundreds in maintenance costs over the driveway's lifetime.</p>
           </div>
-          <div class="bg-gray-50 p-5 rounded-lg">
-            <h4 class="font-bold mb-2">Property Value</h4>
-            <p class="text-gray-600 text-sm">A new concrete driveway can increase your home's value and selling appeal.</p>
+          <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+            <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+              <span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary">💰</span>
+              Property Value
+            </h4>
+            <p class="text-gray-600 text-sm">A new concrete driveway can increase your home's value and significantly improve selling appeal. First impressions matter when buyers pull up.</p>
           </div>
         </div>
 
-        <h3 class="text-xl font-bold text-dark mb-3">Concrete Driveway Cost in Spring Hill</h3>
-        <p class="text-gray-600 mb-4">
-          Expect to pay $8-$15 per square foot for a standard concrete driveway in Spring Hill. Here's a quick cost guide:
+        <h3 class="text-2xl font-bold text-dark mt-10 mb-4">Concrete Driveway Cost in Spring Hill, FL</h3>
+        
+        <p class="text-gray-600 leading-relaxed">
+          One of the most common questions we get is "how much does a concrete driveway cost?" The answer depends on several factors including size, thickness, finish type, and site preparation needs. Here's a general guide for Spring Hill area pricing in 2025:
         </p>
-        <div class="overflow-x-auto mb-8">
-          <table class="w-full border-collapse bg-gray-50 rounded-lg overflow-hidden text-sm">
+
+        <div class="overflow-x-auto my-8">
+          <table class="w-full border-collapse bg-gray-50 rounded-xl overflow-hidden">
             <thead>
               <tr class="bg-dark text-white">
-                <th class="p-3 text-left">Driveway Size</th>
-                <th class="p-3 text-left">Sq. Ft.</th>
-                <th class="p-3 text-left">Cost Range</th>
+                <th class="p-4 text-left font-semibold">Driveway Type</th>
+                <th class="p-4 text-left font-semibold">Size (Sq Ft)</th>
+                <th class="p-4 text-left font-semibold">Cost Range</th>
               </tr>
             </thead>
-            <tbody>
-              <tr class="border-b"><td class="p-3">Single Car</td><td class="p-3">300-400</td><td class="p-3">$2,400-$6,000</td></tr>
-              <tr class="border-b"><td class="p-3">Two Car</td><td class="p-3">500-700</td><td class="p-3">$4,000-$10,500</td></tr>
-              <tr><td class="p-3">Large/Circular</td><td class="p-3">800-1200</td><td class="p-3">$6,400-$18,000</td></tr>
+            <tbody class="text-gray-700">
+              <tr class="border-b border-gray-200"><td class="p-4">Single Car</td><td class="p-4">300-400</td><td class="p-4 font-medium">$2,400-$6,000</td></tr>
+              <tr class="border-b border-gray-200"><td class="p-4">Two Car</td><td class="p-4">500-700</td><td class="p-4 font-medium">$4,000-$10,500</td></tr>
+              <tr class="border-b border-gray-200"><td class="p-4">Large/Extended</td><td class="p-4">800-1,200</td><td class="p-4 font-medium">$6,400-$18,000</td></tr>
+              <tr><td class="p-4">Circular/Custom</td><td class="p-4">1,000-2,000</td><td class="p-4 font-medium">$8,000-$30,000</td></tr>
             </tbody>
           </table>
         </div>
+
+        <p class="text-gray-600 leading-relaxed">
+          <strong>Note:</strong> These prices are for standard broom-finished concrete. Decorative options like stamped concrete, exposed aggregate, or colored concrete add 40-60% to the base price. Removal of existing concrete adds $2-4 per square foot. Every project is different, which is why we provide free, detailed estimates specific to your property.
+        </p>
+
+        <h3 class="text-2xl font-bold text-dark mt-10 mb-4">Driveway Finish Options</h3>
+        
+        <p class="text-gray-600 leading-relaxed">
+          While many homeowners choose a traditional broom finish for its durability and slip resistance, we offer several finish options to match your home's style and your budget:
+        </p>
+
+        <ul class="space-y-4 my-6">
+          <li class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            <div><strong>Broom Finish</strong> — The most common and economical choice. Provides excellent traction when wet and hides minor imperfections well.</div>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            <div><strong>Exposed Aggregate</strong> — Reveals the decorative stones in the concrete mix for a textured, natural look. Very popular in Florida.</div>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            <div><strong>Stamped Concrete</strong> — Mimics the look of brick, stone, or tile. Premium option that dramatically enhances curb appeal.</div>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            <div><strong>Colored Concrete</strong> — Integral color mixed throughout the concrete for consistent, fade-resistant color that never needs painting.</div>
+          </li>
+        </ul>
+
+        <h3 class="text-2xl font-bold text-dark mt-10 mb-4">Spring Hill Driveway Permit Requirements</h3>
+        
+        <p class="text-gray-600 leading-relaxed">
+          In Hernando County, most new driveways and driveway replacements require a permit from the Building Department. This is especially true if your driveway connects to a public right-of-way (the street). The permit process ensures proper drainage, setbacks, and construction standards are followed.
+        </p>
+        
+        <p class="text-gray-600 leading-relaxed">
+          Don't worry about the paperwork—we handle all permit applications and schedule required inspections for our customers at no additional charge. This is part of our commitment to making the process as simple as possible for Spring Hill homeowners.
+        </p>
+
+        <div class="bg-primary/5 border border-primary/20 rounded-xl p-6 my-8">
+          <h4 class="font-bold text-lg mb-2">Get Your Free Driveway Estimate</h4>
+          <p class="text-gray-600 mb-4">Ready to upgrade your driveway? Call us at <a href={business.phoneLink} class="text-primary font-bold">{business.phone}</a> or request a quote online. We'll provide a detailed, written estimate with no obligation and no high-pressure sales tactics.</p>
+          <a href={business.phoneLink} class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-primary-700 transition">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+            Call {business.phone}
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="py-16 bg-gray-50">
+  <!-- Customer Reviews -->
+  {relatedReviews.length > 0 && (
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-4xl mx-auto px-5">
+        <h2 class="text-2xl font-bold text-center mb-8">What Our Driveway Customers Say</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          {relatedReviews.map(review => (
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div class="flex items-center gap-3 mb-4">
+                <div class={`w-12 h-12 ${review.color} rounded-full flex items-center justify-center text-white font-bold`}>
+                  {review.name.charAt(0)}
+                </div>
+                <div>
+                  <span class="font-bold block">{review.name}</span>
+                  <span class="text-gray-500 text-sm">{review.neighborhood}</span>
+                </div>
+              </div>
+              <p class="text-gray-600 text-sm">"{review.text}"</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- FAQ Section -->
+  <section class="py-16 bg-white">
     <div class="max-w-4xl mx-auto px-5">
-      <h2 class="text-2xl font-bold text-center mb-8">Frequently Asked Questions</h2>
+      <h2 class="text-2xl font-bold text-center mb-8">Frequently Asked Questions About Concrete Driveways</h2>
       <div class="space-y-4">
-        <details class="group bg-white rounded-xl shadow-sm">
-          <summary class="flex justify-between items-center cursor-pointer p-5 font-semibold list-none">
+        <details class="group bg-gray-50 rounded-xl border border-gray-200" open>
+          <summary class="flex justify-between items-center cursor-pointer p-5 font-semibold list-none hover:bg-gray-100 rounded-xl transition">
             How much does a concrete driveway cost in Spring Hill, FL?
-            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
           </summary>
           <div class="px-5 pb-5 text-gray-600">
-            Concrete driveway costs in Spring Hill range from $8-$15 per square foot. A standard 400 sq ft single-car driveway costs $3,200-$6,000. Two-car driveways (600 sq ft) cost $4,800-$9,000. Stamped driveways cost 40-60% more.
+            Concrete driveway costs in Spring Hill range from $8-$15 per square foot for standard finishes. A typical 400 sq ft single-car driveway costs $3,200-$6,000. Two-car driveways (600+ sq ft) cost $4,800-$9,000+. Stamped or decorative concrete adds 40-60% to the base price.
           </div>
         </details>
-        <details class="group bg-white rounded-xl shadow-sm">
-          <summary class="flex justify-between items-center cursor-pointer p-5 font-semibold list-none">
+        <details class="group bg-gray-50 rounded-xl border border-gray-200">
+          <summary class="flex justify-between items-center cursor-pointer p-5 font-semibold list-none hover:bg-gray-100 rounded-xl transition">
             How thick should a concrete driveway be in Florida?
-            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
           </summary>
           <div class="px-5 pb-5 text-gray-600">
-            A residential driveway should be 4 inches thick minimum for cars and light trucks. For RVs, boats, or heavy vehicles, we recommend 5-6 inches. We use 4,000 PSI concrete with wire mesh or fiber reinforcement.
+            A residential driveway should be 4 inches thick minimum for passenger cars and light trucks. For RVs, boats on trailers, or heavy vehicles, we recommend 5-6 inches with additional rebar reinforcement. All our driveways use 4,000+ PSI concrete.
           </div>
         </details>
-        <details class="group bg-white rounded-xl shadow-sm">
-          <summary class="flex justify-between items-center cursor-pointer p-5 font-semibold list-none">
+        <details class="group bg-gray-50 rounded-xl border border-gray-200">
+          <summary class="flex justify-between items-center cursor-pointer p-5 font-semibold list-none hover:bg-gray-100 rounded-xl transition">
             How long until I can drive on my new concrete driveway?
-            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
           </summary>
           <div class="px-5 pb-5 text-gray-600">
-            Wait 7 days before driving passenger vehicles on new concrete. Heavy vehicles should wait 28 days. You can walk on it after 24-48 hours. Florida's warm climate helps concrete cure faster.
+            Wait at least 7 days before driving passenger vehicles on new concrete. Heavy vehicles (trucks, RVs) should wait the full 28 days for concrete to reach maximum strength. You can walk on it after 24-48 hours. Florida's warm climate accelerates curing.
+          </div>
+        </details>
+        <details class="group bg-gray-50 rounded-xl border border-gray-200">
+          <summary class="flex justify-between items-center cursor-pointer p-5 font-semibold list-none hover:bg-gray-100 rounded-xl transition">
+            Is concrete better than asphalt for driveways in Florida?
+            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-5 pb-5 text-gray-600">
+            Concrete is generally the better choice for Florida driveways. It lasts 30+ years vs 15-20 for asphalt, handles heat better without softening, requires less maintenance (no resealing), and reflects sunlight to stay cooler. The upfront cost is slightly higher but long-term value is better.
+          </div>
+        </details>
+        <details class="group bg-gray-50 rounded-xl border border-gray-200">
+          <summary class="flex justify-between items-center cursor-pointer p-5 font-semibold list-none hover:bg-gray-100 rounded-xl transition">
+            Do I need a permit for a new driveway in Hernando County?
+            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-5 pb-5 text-gray-600">
+            Yes, most new driveways and driveway replacements in Hernando County require a permit from the Building Department, especially if connecting to a public right-of-way. Spring Hill Concrete Co. handles all permitting paperwork and inspections for our customers.
           </div>
         </details>
       </div>
     </div>
   </section>
 
-  <section class="py-16 bg-gradient-to-r from-primary to-orange-600 text-white text-center">
+  <!-- CTA -->
+  <section class="py-16 bg-gradient-to-br from-dark to-dark-deep text-white text-center">
     <div class="max-w-3xl mx-auto px-5">
-      <h2 class="text-3xl font-bold mb-4">Get Your Free Driveway Estimate</h2>
-      <p class="text-lg opacity-90 mb-8">Call now or request a quote online. No obligation.</p>
-      <a href={business.phoneLink} class="inline-flex items-center gap-3 bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition">
+      <h2 class="text-3xl font-bold mb-4">Ready for a New Concrete Driveway?</h2>
+      <p class="text-lg text-gray-300 mb-8">Get your free estimate today. Quality work, fair prices, satisfaction guaranteed.</p>
+      <a href={business.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition shadow-lg">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
-        {business.phone}
+        Call {business.phone}
       </a>
     </div>
   </section>

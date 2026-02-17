@@ -1,80 +1,267 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { business, services } from '../../data/business';
+import { business, services, reviews } from '../../data/business';
 
 const service = services.find(s => s.slug === 'concrete-patios')!;
-const title = `Concrete Patio Contractors Spring Hill FL | ${business.name}`;
-const description = `Custom concrete patio installation in Spring Hill, FL. Pool decks, outdoor living spaces, fire pit areas. Call ${business.phone} for free estimate.`;
+const title = `Concrete Patio Contractors Spring Hill FL | Pool Decks & Outdoor Living`;
+const description = `Professional concrete patio installation in Spring Hill, FL. Custom patios, pool decks, outdoor living spaces. Stamped & decorative options. Call ${business.phone} for free estimate.`;
+
+const relatedReviews = reviews.filter(r => r.service.toLowerCase().includes('patio'));
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does a concrete patio cost in Spring Hill, FL?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Concrete patio costs in Spring Hill range from $10-$18 per square foot for standard finishes. A typical 200 sq ft patio costs $2,000-$3,600. Larger patios (400+ sq ft) cost $4,000-$7,200+. Stamped concrete adds 40-60% to base pricing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How thick should a concrete patio be?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A residential concrete patio should be 4 inches thick minimum. For pool decks or areas with heavy furniture, we recommend 4-5 inches. All patios include proper base preparation and reinforcement for Florida's climate."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the best concrete finish for pool decks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For pool decks, we recommend textured finishes like broom finish, exposed aggregate, or cool deck coating. These provide slip resistance when wet and stay cooler underfoot than smooth concrete. Stamped concrete with proper texture is also popular."
+      }
+    }
+  ]
+};
 ---
 
 <Layout title={title} description={description}>
-  <section class="bg-gradient-to-br from-dark to-dark-deep py-16 text-white text-center">
-    <div class="max-w-4xl mx-auto px-5">
-      <h1 class="text-4xl font-bold mb-4">Concrete Patio Contractors</h1>
-      <p class="text-lg text-gray-300 mb-6">Transform your backyard with a beautiful concrete patio</p>
-      <a href={business.phoneLink} class="inline-flex items-center gap-3 bg-primary text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary-dark transition">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
-        Call {business.phone}
-      </a>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-dark to-dark-deep py-16 text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-[url('/images/concrete-patio.webp')] opacity-20 bg-cover bg-center"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-dark/95 to-dark/80"></div>
+    <div class="max-w-4xl mx-auto px-5 text-center relative z-10">
+      <span class="inline-block bg-primary/20 border border-primary/30 text-primary px-4 py-1 rounded-full text-sm font-medium mb-4">Outdoor Living Experts</span>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Concrete Patio Contractors</h1>
+      <p class="text-lg text-gray-300 mb-6 max-w-2xl mx-auto">Custom concrete patios, pool decks, and outdoor living spaces in Spring Hill, FL. Transform your backyard into an entertainer's paradise.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={business.phoneLink} class="inline-flex items-center justify-center gap-3 bg-primary hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition shadow-lg">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+          {business.phone}
+        </a>
+        <a href="/contact/" class="inline-flex items-center justify-center gap-2 border-2 border-white/50 text-white px-8 py-4 rounded-xl font-bold hover:bg-white hover:text-dark transition">
+          Get Free Estimate
+        </a>
+      </div>
     </div>
   </section>
 
+  <!-- Trust Bar -->
+  <section class="bg-gray-50 py-4 border-b">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="flex flex-wrap justify-center items-center gap-6 text-sm">
+        <span class="flex items-center gap-2"><svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Licensed & Insured</span>
+        <span class="flex items-center gap-2"><svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 5.0 Rating</span>
+        <span class="flex items-center gap-2"><svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg> {business.yearsExperience}+ Years</span>
+        <span class="flex items-center gap-2"><svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg> Free Estimates</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
   <section class="py-16 bg-white">
     <div class="max-w-4xl mx-auto px-5">
-      <h2 class="text-2xl font-bold text-dark mb-4">Custom Concrete Patios in Spring Hill</h2>
-      <p class="text-gray-600 mb-6">
-        Florida's beautiful weather means you can enjoy your outdoor space year-round. A concrete patio from {business.name} gives you the perfect place to relax, entertain, and make memories with family and friends. We design and build custom patios that complement your home and lifestyle.
-      </p>
+      <div class="prose prose-lg max-w-none">
+        <h2 class="text-3xl font-bold text-dark mb-6">Custom Concrete Patios in Spring Hill, FL</h2>
+        
+        <p class="text-gray-600 text-lg leading-relaxed">
+          In Florida, outdoor living isn't just a luxury—it's a way of life. With our year-round pleasant weather, a well-designed patio becomes an extension of your home, perfect for entertaining, relaxing, or enjoying morning coffee while watching the sunrise. At {business.name}, we specialize in creating beautiful, functional concrete patios that enhance your outdoor lifestyle.
+        </p>
 
-      <h3 class="text-xl font-bold text-dark mb-3">Patio Options We Offer:</h3>
-      <ul class="grid md:grid-cols-2 gap-3 mb-8">
-        {service.features.map(f => (
-          <li class="flex items-center gap-2 bg-gray-50 p-3 rounded-lg">
-            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-            {f}
+        <p class="text-gray-600 leading-relaxed">
+          Whether you're envisioning a simple patio off your back door, an expansive entertainment area with an outdoor kitchen, or a stunning pool deck, our experienced team delivers quality craftsmanship that stands up to Florida's demanding climate. We've been building patios throughout Hernando County for over {business.yearsExperience} years, and we understand what it takes to create outdoor spaces that last.
+        </p>
+
+        <h3 class="text-2xl font-bold text-dark mt-10 mb-4">Patio Services We Offer</h3>
+
+        <p class="text-gray-600 leading-relaxed">
+          Concrete patios offer tremendous versatility in design, finish, and function. Here are the most popular patio projects we complete for Spring Hill homeowners:
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-6 my-8 not-prose">
+          <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+            <h4 class="font-bold text-lg mb-2">Standard Patios</h4>
+            <p class="text-gray-600 text-sm">Traditional backyard patios in any size or shape. Perfect for outdoor dining, seating areas, and general entertainment space. Broom finish or decorative options available.</p>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+            <h4 class="font-bold text-lg mb-2">Pool Decks</h4>
+            <p class="text-gray-600 text-sm">Slip-resistant, cool-underfoot surfaces surrounding your pool. We specialize in cool deck coatings and textured finishes designed specifically for pool areas.</p>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+            <h4 class="font-bold text-lg mb-2">Covered Patio Extensions</h4>
+            <p class="text-gray-600 text-sm">Concrete slabs designed to support lanai screens, pergolas, or covered patio structures. Properly reinforced for Florida's building requirements.</p>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+            <h4 class="font-bold text-lg mb-2">Fire Pit Areas</h4>
+            <p class="text-gray-600 text-sm">Dedicated concrete pads for fire pits and outdoor fireplaces. Heat-resistant design with proper clearances and drainage considerations.</p>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+            <h4 class="font-bold text-lg mb-2">Outdoor Kitchen Pads</h4>
+            <p class="text-gray-600 text-sm">Heavy-duty concrete foundations for outdoor kitchens, built-in grills, and bar areas. Designed to support cabinetry and appliances.</p>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+            <h4 class="font-bold text-lg mb-2">Patio Expansions</h4>
+            <p class="text-gray-600 text-sm">Extending your existing patio to create more usable space. We carefully match the existing finish and ensure seamless transitions.</p>
+          </div>
+        </div>
+
+        <h3 class="text-2xl font-bold text-dark mt-10 mb-4">Patio Features We Include</h3>
+
+        <div class="bg-gray-50 rounded-xl p-6 my-8">
+          <ul class="grid md:grid-cols-2 gap-3 list-none pl-0 m-0">
+            {service.features.map(f => (
+              <li class="flex items-start gap-3 text-gray-700">
+                <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                {f}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <h3 class="text-2xl font-bold text-dark mt-10 mb-4">Concrete Patio Costs in Spring Hill</h3>
+        
+        <p class="text-gray-600 leading-relaxed">
+          Patio pricing varies based on size, finish type, and site conditions. Here's what Spring Hill homeowners typically invest in their outdoor spaces:
+        </p>
+
+        <div class="overflow-x-auto my-8">
+          <table class="w-full border-collapse bg-gray-50 rounded-xl overflow-hidden">
+            <thead>
+              <tr class="bg-dark text-white">
+                <th class="p-4 text-left font-semibold">Patio Size</th>
+                <th class="p-4 text-left font-semibold">Sq Ft</th>
+                <th class="p-4 text-left font-semibold">Standard Finish</th>
+                <th class="p-4 text-left font-semibold">Stamped</th>
+              </tr>
+            </thead>
+            <tbody class="text-gray-700">
+              <tr class="border-b border-gray-200"><td class="p-4">Small</td><td class="p-4">100-200</td><td class="p-4">$1,000-$3,600</td><td class="p-4">$1,400-$5,400</td></tr>
+              <tr class="border-b border-gray-200"><td class="p-4">Medium</td><td class="p-4">200-400</td><td class="p-4">$2,000-$7,200</td><td class="p-4">$2,800-$10,800</td></tr>
+              <tr class="border-b border-gray-200"><td class="p-4">Large</td><td class="p-4">400-600</td><td class="p-4">$4,000-$10,800</td><td class="p-4">$5,600-$16,200</td></tr>
+              <tr><td class="p-4">Extra Large</td><td class="p-4">600+</td><td class="p-4">$6,000+</td><td class="p-4">$8,400+</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="text-2xl font-bold text-dark mt-10 mb-4">Pool Deck Considerations for Florida Homes</h3>
+        
+        <p class="text-gray-600 leading-relaxed">
+          Pool decks require special attention in Florida's climate. The intense summer sun can make standard concrete uncomfortably hot to walk on barefoot. We offer several solutions specifically designed for pool areas:
+        </p>
+
+        <ul class="space-y-4 my-6">
+          <li class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            <div><strong>Cool Deck Coatings</strong> — Acrylic-based coatings that reflect heat and stay significantly cooler than standard concrete, even in direct sunlight.</div>
           </li>
-        ))}
-      </ul>
+          <li class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            <div><strong>Exposed Aggregate</strong> — The textured surface stays cooler than smooth concrete and provides excellent slip resistance when wet.</div>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            <div><strong>Light-Colored Concrete</strong> — Lighter colors reflect more sunlight. We can add integral color or use lighter aggregates to reduce heat absorption.</div>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            <div><strong>Proper Drainage</strong> — Pool decks must slope away from the pool at the right grade to prevent standing water and ensure proper drainage.</div>
+          </li>
+        </ul>
 
-      <h3 class="text-xl font-bold text-dark mb-3">Popular Patio Projects</h3>
-      <div class="grid md:grid-cols-3 gap-6 mb-8">
-        <div class="bg-gray-50 p-5 rounded-lg text-center">
-          <span class="text-4xl block mb-2">🏊</span>
-          <h4 class="font-bold mb-2">Pool Decks</h4>
-          <p class="text-gray-600 text-sm">Non-slip surfaces, cool deck options, drainage solutions.</p>
-        </div>
-        <div class="bg-gray-50 p-5 rounded-lg text-center">
-          <span class="text-4xl block mb-2">🔥</span>
-          <h4 class="font-bold mb-2">Fire Pit Areas</h4>
-          <p class="text-gray-600 text-sm">Heat-resistant concrete, decorative finishes, seating areas.</p>
-        </div>
-        <div class="bg-gray-50 p-5 rounded-lg text-center">
-          <span class="text-4xl block mb-2">🍖</span>
-          <h4 class="font-bold mb-2">Outdoor Kitchens</h4>
-          <p class="text-gray-600 text-sm">Level foundations, utility connections, drainage.</p>
+        <h3 class="text-2xl font-bold text-dark mt-10 mb-4">Why Spring Hill Homeowners Choose Concrete Patios</h3>
+        
+        <p class="text-gray-600 leading-relaxed">
+          While pavers and natural stone are alternatives, concrete remains the most popular choice for Florida patios for several compelling reasons. Concrete is highly customizable—through stamping, staining, and coloring, it can mimic the appearance of expensive natural materials at a fraction of the cost. It's also more durable than pavers, which can shift over time, and requires significantly less maintenance.
+        </p>
+
+        <p class="text-gray-600 leading-relaxed">
+          In our sandy Florida soil, proper base preparation is crucial for any patio material. Concrete's monolithic nature—it's one continuous piece rather than many individual units—means it's less susceptible to settling and shifting than paver systems. When properly installed with adequate base material and reinforcement, a concrete patio will maintain its level surface for decades.
+        </p>
+
+        <div class="bg-primary/5 border border-primary/20 rounded-xl p-6 my-8">
+          <h4 class="font-bold text-lg mb-2">Ready to Design Your Dream Patio?</h4>
+          <p class="text-gray-600 mb-4">Call us at <a href={business.phoneLink} class="text-primary font-bold">{business.phone}</a> to schedule your free consultation. We'll discuss your vision, assess your space, and provide a detailed estimate with design options.</p>
+          <a href={business.phoneLink} class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-primary-700 transition">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+            Call {business.phone}
+          </a>
         </div>
       </div>
-
-      <h3 class="text-xl font-bold text-dark mb-3">Concrete Patio Cost in Spring Hill</h3>
-      <p class="text-gray-600 mb-4">
-        Basic concrete patios start around $6-$10 per square foot. Stamped or decorative patios range from $12-$20 per square foot. Here are typical costs:
-      </p>
-      <ul class="list-disc pl-6 mb-8 text-gray-600 space-y-2">
-        <li><strong>Small patio (100-200 sq ft):</strong> $800-$4,000</li>
-        <li><strong>Medium patio (200-400 sq ft):</strong> $1,600-$8,000</li>
-        <li><strong>Large patio (400-600 sq ft):</strong> $3,200-$12,000</li>
-        <li><strong>Pool deck (400-800 sq ft):</strong> $3,200-$16,000</li>
-      </ul>
     </div>
   </section>
 
-  <section class="py-16 bg-gradient-to-r from-primary to-orange-600 text-white text-center">
+  <!-- FAQ Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-5">
+      <h2 class="text-2xl font-bold text-center mb-8">Frequently Asked Questions About Concrete Patios</h2>
+      <div class="space-y-4">
+        <details class="group bg-white rounded-xl border border-gray-200" open>
+          <summary class="flex justify-between items-center cursor-pointer p-5 font-semibold list-none hover:bg-gray-50 rounded-xl transition">
+            How much does a concrete patio cost in Spring Hill, FL?
+            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-5 pb-5 text-gray-600">
+            Concrete patio costs in Spring Hill range from $10-$18 per square foot for standard finishes. A typical 200 sq ft patio costs $2,000-$3,600. Larger patios and stamped concrete options cost more. Every project is unique, so call for a free estimate.
+          </div>
+        </details>
+        <details class="group bg-white rounded-xl border border-gray-200">
+          <summary class="flex justify-between items-center cursor-pointer p-5 font-semibold list-none hover:bg-gray-50 rounded-xl transition">
+            How thick should a concrete patio be?
+            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-5 pb-5 text-gray-600">
+            A residential concrete patio should be 4 inches thick minimum. For pool decks or areas expecting heavy loads (outdoor kitchens, large furniture), we recommend 4-5 inches with fiber or wire mesh reinforcement.
+          </div>
+        </details>
+        <details class="group bg-white rounded-xl border border-gray-200">
+          <summary class="flex justify-between items-center cursor-pointer p-5 font-semibold list-none hover:bg-gray-50 rounded-xl transition">
+            What's the best finish for pool decks?
+            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-5 pb-5 text-gray-600">
+            For pool decks, we recommend cool deck coatings, exposed aggregate, or broom finish—all provide slip resistance when wet and stay cooler underfoot. Avoid smooth trowel finishes around pools as they can be slippery.
+          </div>
+        </details>
+        <details class="group bg-white rounded-xl border border-gray-200">
+          <summary class="flex justify-between items-center cursor-pointer p-5 font-semibold list-none hover:bg-gray-50 rounded-xl transition">
+            Can you match my existing patio when adding an extension?
+            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-5 pb-5 text-gray-600">
+            We do our best to match existing patios, though an exact match is challenging since concrete naturally weathers and discolors over time. We can often get very close matches, or we can suggest design elements that make the transition seamless.
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-gradient-to-br from-dark to-dark-deep text-white text-center">
     <div class="max-w-3xl mx-auto px-5">
-      <h2 class="text-3xl font-bold mb-4">Design Your Dream Patio</h2>
-      <p class="text-lg opacity-90 mb-8">Get a free design consultation and estimate.</p>
-      <a href={business.phoneLink} class="inline-flex items-center gap-3 bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition">
+      <h2 class="text-3xl font-bold mb-4">Ready for Your New Outdoor Living Space?</h2>
+      <p class="text-lg text-gray-300 mb-8">Get your free patio estimate today. Quality work, fair prices, satisfaction guaranteed.</p>
+      <a href={business.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition shadow-lg">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
-        {business.phone}
+        Call {business.phone}
       </a>
     </div>
   </section>

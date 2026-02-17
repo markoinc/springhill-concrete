@@ -1,9 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { business, services, serviceAreas, faqs, reviews } from '../data/business';
+import { business, services, serviceAreas, faqs, reviews, trustBadges, processSteps } from '../data/business';
 
 const title = 'Trusted Spring Hill Concrete Contractors | Driveways, Slabs, Patios';
-const description = 'Need a concrete driveway, slab, or patio? We are the #1 trusted concrete contractors in Spring Hill and other areas in Pasco & Hernando Counties.';
+const description = `Professional concrete contractors in Spring Hill, FL. Driveways, patios, slabs, stamped concrete. ${business.yearsExperience}+ years experience. Licensed & insured. Call ${business.phone} for free estimate.`;
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
@@ -56,6 +56,9 @@ const faqSchema = {
     }
   }))
 };
+
+const primaryAreas = serviceAreas.filter(a => a.primary);
+const secondaryAreas = serviceAreas.filter(a => !a.primary);
 ---
 
 <Layout title={title} description={description}>
@@ -64,106 +67,142 @@ const faqSchema = {
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   </Fragment>
 
-  <!-- Hero Section -->
+  <!-- Hero Section with Form Above Fold -->
   <section class="bg-gradient-to-br from-dark to-dark-deep py-12 md:py-16 relative overflow-hidden">
-    <div class="absolute inset-0 bg-[url("/images/hero-bg.webp")] opacity-20 bg-cover"></div>
+    <div class="absolute inset-0 bg-[url('/images/hero-bg.webp')] opacity-15 bg-cover bg-center"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-dark/90 to-dark/70"></div>
     <div class="max-w-6xl mx-auto px-5 relative z-10">
-      <div class="grid md:grid-cols-2 gap-10 items-center">
+      <div class="grid lg:grid-cols-2 gap-10 items-start">
         <div class="text-white">
-          <div class="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 px-4 py-2 rounded-full text-sm text-primary mb-5">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-            Rated 5.0 ★ by Spring Hill Homeowners
+          <!-- Urgency Badge -->
+          <div class="inline-flex items-center gap-2 bg-accent/20 border border-accent/40 px-4 py-2 rounded-full text-sm text-accent mb-5 animate-pulse">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
+            ⚡ Limited Availability — Booking 2-3 Weeks Out
           </div>
           
           <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-5">
-            <span class="text-primary">Spring Hill's</span> Trusted Concrete Contractors
+            Spring Hill's <span class="text-primary">Most Trusted</span> Concrete Contractors
           </h1>
           
           <p class="text-lg text-gray-300 mb-6 leading-relaxed">
-            Professional concrete driveways, patios, slabs, and stamped concrete. Quality craftsmanship with {business.yearsExperience}+ years of experience serving Hernando County.
+            Professional concrete driveways, patios, slabs, and stamped concrete for homes throughout Hernando County. <strong class="text-white">{business.yearsExperience}+ years</strong> of experience and <strong class="text-white">{business.projectsCompleted}+ projects</strong> completed.
           </p>
           
+          <!-- Trust Signals Row -->
           <div class="flex flex-wrap gap-4 mb-8">
-            <div class="flex items-center gap-2 text-sm">
-              <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            <div class="flex items-center gap-2 bg-white/10 px-3 py-2 rounded-lg text-sm">
+              <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
               Licensed & Insured
             </div>
-            <div class="flex items-center gap-2 text-sm">
-              <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              Free Estimates
+            <div class="flex items-center gap-2 bg-white/10 px-3 py-2 rounded-lg text-sm">
+              <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+              5.0 ★ ({business.reviewCount} Reviews)
             </div>
-            <div class="flex items-center gap-2 text-sm">
-              <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              Quality Guaranteed
+            <div class="flex items-center gap-2 bg-white/10 px-3 py-2 rounded-lg text-sm">
+              <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              Free Estimates
             </div>
           </div>
           
-          <a href={business.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-lg font-bold text-xl transition shadow-lg shadow-primary/30">
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
-            {business.phone}
-          </a>
+          <!-- Phone CTA (Desktop) -->
+          <div class="hidden md:block">
+            <p class="text-sm text-gray-400 mb-2">Ready to get started? Call us now:</p>
+            <a href={business.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-bold text-2xl transition shadow-lg shadow-primary/30">
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+              {business.phone}
+            </a>
+          </div>
         </div>
         
         <!-- Lead Form Card -->
-        <div class="bg-white rounded-xl p-6 shadow-2xl">
-          <h3 class="text-xl font-bold text-center mb-1">Get Your Free Quote</h3>
-          <p class="text-gray-500 text-sm text-center mb-4">No obligation • Response within 24 hours</p>
+        <div class="bg-white rounded-2xl p-6 shadow-2xl border-t-4 border-primary">
+          <div class="text-center mb-4">
+            <h3 class="text-xl font-bold">Get Your FREE Quote</h3>
+            <p class="text-gray-500 text-sm">No obligation • Response within 24 hours</p>
+          </div>
           
           <iframe 
             src="https://api.leadconnectorhq.com/widget/survey/SFUsnVLQ7nUSZh84dBED" 
-            style="width:100%;height:500px;border:none;"
-            title="Request a Quote">
+            style="width:100%;height:480px;border:none;"
+            title="Request a Free Concrete Quote"
+            loading="lazy">
           </iframe>
-          <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+          <script src="https://link.msgsndr.com/js/form_embed.js" async></script>
           
           <div class="mt-4 bg-amber-50 border border-amber-200 rounded-lg p-3 text-center">
-            <p class="text-sm text-amber-800"><strong>⚡ Limited Availability</strong> — Booking 2-3 weeks out</p>
+            <p class="text-sm text-amber-800 font-medium">
+              <span class="text-lg">🔥</span> High Demand: <strong>3 spots left</strong> for February
+            </p>
           </div>
+          
+          <p class="text-xs text-gray-400 text-center mt-3">
+            Or call directly: <a href={business.phoneLink} class="text-primary font-semibold hover:underline">{business.phone}</a>
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Trust Badges -->
-  <section class="bg-gray-50 py-6 border-b">
+  <!-- Trust Badges Bar -->
+  <section class="bg-gray-50 py-6 border-b border-gray-200">
     <div class="max-w-6xl mx-auto px-5">
-      <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16">
-        <div class="flex items-center gap-3">
-          <div class="w-12 h-12 bg-dark rounded-full flex items-center justify-center">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
+        <div class="flex items-center gap-3 justify-center">
+          <div class="w-12 h-12 bg-dark rounded-full flex items-center justify-center flex-shrink-0">
             <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
           </div>
-          <div>
-            <span class="font-semibold block text-sm">Licensed & Insured</span>
-            <span class="text-xs text-gray-500">FL State Licensed</span>
+          <div class="text-left">
+            <span class="font-bold block text-sm">Licensed</span>
+            <span class="text-xs text-gray-500">FL State</span>
           </div>
         </div>
         
-        <div class="flex items-center gap-3">
-          <div class="w-12 h-12 bg-dark rounded-full flex items-center justify-center">
-            <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+        <div class="flex items-center gap-3 justify-center">
+          <div class="w-12 h-12 bg-dark rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
           </div>
-          <div>
-            <span class="font-semibold block text-sm">5.0 Rating</span>
+          <div class="text-left">
+            <span class="font-bold block text-sm">Insured</span>
+            <span class="text-xs text-gray-500">$1M Liability</span>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-3 justify-center">
+          <div class="w-12 h-12 bg-dark rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+          </div>
+          <div class="text-left">
+            <span class="font-bold block text-sm">5.0 Rating</span>
             <span class="text-xs text-gray-500">{business.reviewCount}+ Reviews</span>
           </div>
         </div>
         
-        <div class="flex items-center gap-3">
-          <div class="w-12 h-12 bg-dark rounded-full flex items-center justify-center">
+        <div class="flex items-center gap-3 justify-center">
+          <div class="w-12 h-12 bg-dark rounded-full flex items-center justify-center flex-shrink-0">
             <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
           </div>
-          <div>
-            <span class="font-semibold block text-sm">{business.yearsExperience}+ Years</span>
+          <div class="text-left">
+            <span class="font-bold block text-sm">{business.yearsExperience}+ Years</span>
             <span class="text-xs text-gray-500">Experience</span>
           </div>
         </div>
         
-        <div class="flex items-center gap-3">
-          <div class="w-12 h-12 bg-dark rounded-full flex items-center justify-center">
+        <div class="flex items-center gap-3 justify-center">
+          <div class="w-12 h-12 bg-dark rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+          </div>
+          <div class="text-left">
+            <span class="font-bold block text-sm">{business.projectsCompleted}+</span>
+            <span class="text-xs text-gray-500">Projects</span>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-3 justify-center">
+          <div class="w-12 h-12 bg-dark rounded-full flex items-center justify-center flex-shrink-0">
             <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
           </div>
-          <div>
-            <span class="font-semibold block text-sm">Free Estimates</span>
+          <div class="text-left">
+            <span class="font-bold block text-sm">Free Quotes</span>
             <span class="text-xs text-gray-500">No Obligation</span>
           </div>
         </div>
@@ -171,32 +210,56 @@ const faqSchema = {
     </div>
   </section>
 
-  <!-- Process Section -->
+  <!-- Why Choose Us (Social Proof) -->
   <section class="py-16 bg-white">
     <div class="max-w-6xl mx-auto px-5">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold mb-3">How It Works</h2>
-        <p class="text-gray-600 max-w-xl mx-auto">Getting quality concrete work is simple. We handle everything from quote to completion.</p>
+        <span class="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-sm font-medium mb-4">Why Choose Us</span>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Spring Hill's Premier Concrete Contractor</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          Since {business.foundedYear}, we've been the trusted concrete contractor for homeowners across Hernando County. Here's what sets us apart from other concrete companies in the Spring Hill area.
+        </p>
       </div>
       
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="text-center p-8 bg-gray-50 rounded-xl hover:shadow-lg transition">
-          <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-5">1</div>
-          <h3 class="font-bold text-lg mb-2">Request a Quote</h3>
-          <p class="text-gray-600 text-sm">Call us or fill out the form. We'll discuss your project and schedule a free on-site estimate.</p>
+      <div class="grid md:grid-cols-3 gap-8 mb-12">
+        <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-xl transition duration-300 border border-gray-100">
+          <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+          </div>
+          <h3 class="font-bold text-xl mb-3">Quality Craftsmanship</h3>
+          <p class="text-gray-600">
+            We use only premium 4,000+ PSI concrete with proper reinforcement. Every project is built to last 30+ years in Florida's demanding climate. No shortcuts, no compromises.
+          </p>
         </div>
         
-        <div class="text-center p-8 bg-gray-50 rounded-xl hover:shadow-lg transition">
-          <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-5">2</div>
-          <h3 class="font-bold text-lg mb-2">Get Your Estimate</h3>
-          <p class="text-gray-600 text-sm">We'll assess your needs, explain options, and provide a detailed written quote with no hidden fees.</p>
+        <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-xl transition duration-300 border border-gray-100">
+          <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+          </div>
+          <h3 class="font-bold text-xl mb-3">Fair, Transparent Pricing</h3>
+          <p class="text-gray-600">
+            Get a detailed written quote before any work begins. No hidden fees, no surprise charges. We honor our quotes and communicate proactively if anything changes.
+          </p>
         </div>
         
-        <div class="text-center p-8 bg-gray-50 rounded-xl hover:shadow-lg transition">
-          <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-5">3</div>
-          <h3 class="font-bold text-lg mb-2">Quality Installation</h3>
-          <p class="text-gray-600 text-sm">Our experienced crew completes your project on time, with attention to detail and thorough cleanup.</p>
+        <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-xl transition duration-300 border border-gray-100">
+          <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <h3 class="font-bold text-xl mb-3">On-Time, Every Time</h3>
+          <p class="text-gray-600">
+            We respect your schedule. Our crews arrive when promised and complete projects within the estimated timeframe. Clear communication throughout every project.
+          </p>
         </div>
+      </div>
+      
+      <!-- Phone CTA -->
+      <div class="text-center">
+        <p class="text-gray-600 mb-3">Questions? We're happy to help.</p>
+        <a href={business.phoneLink} class="inline-flex items-center gap-2 text-primary font-bold text-xl hover:underline">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+          Call {business.phone}
+        </a>
       </div>
     </div>
   </section>
@@ -205,20 +268,39 @@ const faqSchema = {
   <section class="py-16 bg-gray-50">
     <div class="max-w-6xl mx-auto px-5">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold mb-3">Our Concrete Services</h2>
-        <p class="text-gray-600 max-w-xl mx-auto">Quality concrete solutions for every project, from driveways to decorative stamped concrete.</p>
+        <span class="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-sm font-medium mb-4">Our Services</span>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Professional Concrete Services in Spring Hill</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          From new driveways to decorative stamped concrete, we offer comprehensive concrete solutions for residential and light commercial projects throughout Hernando and Pasco Counties.
+        </p>
       </div>
       
       <div class="grid md:grid-cols-2 gap-8">
         {services.map(service => (
-          <a href={`/services/${service.slug}/`} class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition">
-            <div class="h-48 relative overflow-hidden">
-              <img src={`/images/${service.slug === "concrete-driveways" ? "driveway-bighouse" : service.slug === "concrete-patios" ? "concrete-patio" : service.slug === "concrete-slabs" ? "concrete-slab" : "stamped-driveway"}.webp`} alt={service.name} class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+          <a href={`/services/${service.slug}/`} class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-gray-100">
+            <div class="h-52 relative overflow-hidden bg-gray-200">
+              <img 
+                src={`/images/${service.slug === "concrete-driveways" ? "driveway-bighouse" : service.slug === "concrete-patios" ? "concrete-patio" : service.slug === "concrete-slabs" ? "concrete-slab" : "stamped-driveway"}.webp`} 
+                alt={`${service.name} in Spring Hill FL`} 
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-500" 
+                loading="lazy"
+              />
+              <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-sm font-medium text-dark">
+                {service.priceRange}
+              </div>
             </div>
             <div class="p-6">
               <h3 class="font-bold text-xl mb-2 group-hover:text-primary transition">{service.name}</h3>
               <p class="text-gray-600 mb-4">{service.shortDesc}</p>
-              <span class="text-primary font-semibold text-sm group-hover:underline">Learn More →</span>
+              <div class="flex flex-wrap gap-2 mb-4">
+                {service.features.slice(0, 3).map(f => (
+                  <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">{f}</span>
+                ))}
+              </div>
+              <span class="inline-flex items-center text-primary font-semibold text-sm group-hover:gap-2 transition-all">
+                Learn More 
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+              </span>
             </div>
           </a>
         ))}
@@ -226,53 +308,273 @@ const faqSchema = {
     </div>
   </section>
 
-  <!-- Reviews Section -->
+  <!-- Process Section -->
   <section class="py-16 bg-white">
     <div class="max-w-6xl mx-auto px-5">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold mb-3">What Our Customers Say</h2>
-        <div class="inline-flex items-center gap-2 bg-gray-100 px-6 py-2 rounded-full">
-          <span class="text-primary">★★★★★</span>
-          <span class="font-semibold">{business.rating} Rating</span>
-          <span class="text-gray-500">({business.reviewCount} reviews)</span>
+        <span class="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-sm font-medium mb-4">Our Process</span>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">How We Work</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          From your first call to project completion, we make the concrete installation process simple and stress-free. Here's what to expect when you work with Spring Hill Concrete Co.
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {processSteps.map((step, index) => (
+          <div class="relative">
+            <div class="bg-gray-50 rounded-2xl p-6 h-full border border-gray-100 hover:border-primary/30 hover:shadow-lg transition">
+              <div class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center text-xl font-bold mb-4">
+                {step.number}
+              </div>
+              <h3 class="font-bold text-lg mb-2">{step.title}</h3>
+              <p class="text-gray-600 text-sm">{step.description}</p>
+            </div>
+            {index < processSteps.length - 1 && (
+              <div class="hidden lg:block absolute top-1/2 -right-3 transform -translate-y-1/2 text-gray-300">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+      
+      <div class="text-center mt-10">
+        <a href={business.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition shadow-lg">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+          Start Your Project: {business.phone}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="text-center mb-12">
+        <span class="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-sm font-medium mb-4">Customer Reviews</span>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">What Spring Hill Homeowners Say</h2>
+        <div class="inline-flex items-center gap-3 bg-white px-6 py-3 rounded-full shadow-sm">
+          <span class="text-accent text-lg">★★★★★</span>
+          <span class="font-bold">{business.rating} out of 5</span>
+          <span class="text-gray-500">({business.reviewCount} verified reviews)</span>
         </div>
       </div>
       
-      <div class="grid md:grid-cols-3 gap-6">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {reviews.map(review => (
-          <div class="bg-gray-50 rounded-xl p-6 border hover:shadow-lg transition">
-            <div class="flex items-center gap-3 mb-4">
-              <div class={`w-12 h-12 ${review.color} rounded-full flex items-center justify-center text-white font-bold text-lg`}>
+          <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition border border-gray-100">
+            <div class="flex items-start gap-4 mb-4">
+              <div class={`w-12 h-12 ${review.color} rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0`}>
                 {review.name.charAt(0)}
               </div>
               <div>
-                <span class="font-semibold block">{review.name}</span>
-                <span class="text-primary text-sm">★★★★★</span>
+                <span class="font-bold block">{review.name}</span>
+                <span class="text-gray-500 text-sm">{review.neighborhood}</span>
+                <div class="text-accent text-sm mt-1">★★★★★</div>
               </div>
             </div>
-            <p class="text-gray-600 text-sm leading-relaxed">{review.text}</p>
+            <p class="text-gray-600 text-sm leading-relaxed mb-3">"{review.text}"</p>
+            <div class="flex items-center justify-between text-xs text-gray-400">
+              <span>{review.service}</span>
+              <span>{new Date(review.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
+            </div>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Service Areas -->
+  <!-- About / Local Content Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-5">
+      <div class="prose prose-lg max-w-none">
+        <h2 class="text-3xl font-bold text-dark mb-6">Your Local Spring Hill Concrete Experts</h2>
+        
+        <p>
+          When it comes to concrete work in Spring Hill, Florida, homeowners deserve a contractor who understands the unique challenges of our Gulf Coast climate. At Spring Hill Concrete Co., we've spent over {business.yearsExperience} years perfecting our craft in Hernando County, learning what works (and what doesn't) when it comes to pouring durable, beautiful concrete in our hot, humid environment. From the moment you contact us until the final walkthrough of your completed project, you'll experience the difference that comes from working with true local professionals who take pride in every pour.
+        </p>
+        
+        <p>
+          Spring Hill's sandy soil conditions and high water table require special attention during site preparation. Unlike contractors who cut corners, our crews are trained to properly compact and grade the subbase using crushed limestone and compaction equipment, ensuring your new driveway or patio won't settle or crack prematurely. We've poured concrete everywhere from the established neighborhoods of Timber Pines and High Point to newer developments along Mariner Boulevard and Spring Hill Drive, and we understand the specific ground conditions in each area.
+        </p>
+        
+        <h3 class="text-xl font-bold text-dark mt-8 mb-4">Understanding Florida Concrete Requirements</h3>
+        
+        <p>
+          Concrete in Florida faces challenges that contractors up north never deal with. Our intense summer heat accelerates curing times, which requires careful timing and proper hydration during the pour. The afternoon thunderstorms common from May through October mean we schedule our pours for early morning when possible, starting at first light to ensure we have adequate working time before any weather moves in. And the sandy, sometimes unstable soil throughout Hernando County demands proper base preparation that many inexperienced contractors skip entirely.
+        </p>
+        
+        <p>
+          We exclusively use 4,000 PSI concrete or higher for all residential projects—well above the minimum required by Hernando County building codes. Every driveway includes wire mesh or fiber reinforcement, and we always cut proper control joints to manage natural cracking. We also pay special attention to the concrete mix design, working with our ready-mix suppliers to ensure the aggregate and cement ratios are optimized for Florida's climate. These details matter when you want concrete that lasts 30 years instead of 10.
+        </p>
+        
+        <h3 class="text-xl font-bold text-dark mt-8 mb-4">Proudly Serving Hernando County and the Nature Coast</h3>
+        
+        <p>
+          Spring Hill sits at the heart of Florida's beautiful Nature Coast, surrounded by natural springs, state parks, and the stunning Gulf of Mexico coastline. We're proud to serve this community and help homeowners throughout the region improve their properties with quality concrete work. Whether you're minutes from the world-famous Weeki Wachee Springs State Park, near the fishing villages of Hernando Beach and Aripeka, or in one of the many family-friendly neighborhoods that make this area such a great place to live, we're here to help.
+        </p>
+        
+        <p>
+          Our service area extends throughout Hernando County and into neighboring Pasco, Citrus, and Pinellas counties. We've completed projects in Brooksville near the historic downtown courthouse square, out in the pine flatwoods near the Withlacoochee State Forest, along the coastal communities overlooking the Gulf, and down through Hudson, New Port Richey, and Trinity. If you're within about an hour of Spring Hill, we're happy to come out and provide a free estimate for your concrete project.
+        </p>
+        
+        <h3 class="text-xl font-bold text-dark mt-8 mb-4">Local Neighborhoods We've Served</h3>
+        
+        <p>
+          We've built driveways, patios, and slabs for homes in every Spring Hill subdivision you can think of. In the 55+ active adult communities, we've worked extensively in Timber Pines, Sterling Hills, High Point, Spring Hill Villages, and Oak Hill Gardens. For family neighborhoods, we've completed projects in Oak Hills, Spring Lake, Forest Oaks, Pine Ridge Estates, Springstead Shores, and Hunters Ridge. We've also served newer developments like the communities along Mariner Boulevard, Northcliffe Boulevard, and the areas surrounding Nature Coast Technical High School.
+        </p>
+        
+        <p>
+          Each neighborhood has its own character, and we understand the aesthetic expectations of different communities. The established neighborhoods often want concrete that complements decades-old landscaping, while newer areas might be looking for contemporary stamped concrete designs. We work with homeowners to find the perfect solution that fits both their vision and their budget, always keeping local HOA requirements and Hernando County codes in mind.
+        </p>
+        
+        <h3 class="text-xl font-bold text-dark mt-8 mb-4">What Sets Us Apart From Other Concrete Contractors</h3>
+        
+        <p>
+          After {business.projectsCompleted}+ completed projects, we've learned that the key to customer satisfaction isn't just good concrete work—it's the entire experience. That means showing up when we say we will, keeping the work area clean, communicating proactively about schedules and weather delays, and standing behind our work after we leave. We treat every project site like it's our own home, protecting landscaping, cleaning up thoroughly, and leaving your property better than we found it.
+        </p>
+        
+        <p>
+          Our {business.reviewCount}+ five-star reviews speak to this commitment. We're not the cheapest concrete contractor in Spring Hill (and we're skeptical of anyone who is), but we deliver exceptional value: quality materials, experienced crews, transparent pricing, and concrete that will outlast cheaper alternatives by decades. When you choose Spring Hill Concrete Co., you're investing in workmanship that you'll be proud of for years to come.
+        </p>
+        
+        <div class="bg-primary/5 border border-primary/20 rounded-xl p-6 my-8">
+          <h4 class="font-bold text-lg mb-2">Ready to Get Started?</h4>
+          <p class="mb-4">Whether you need a new driveway, patio, pool deck, or shed pad, we'd love to discuss your project. Call us at <a href={business.phoneLink} class="text-primary font-bold">{business.phone}</a> or fill out our online form for a free, no-obligation estimate.</p>
+          <a href={business.phoneLink} class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-primary-700 transition">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+            Call {business.phone}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust & Credibility Section -->
+  <section class="py-16 bg-gray-100">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="text-center mb-12">
+        <span class="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-sm font-medium mb-4">Why Trust Us</span>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Spring Hill's Most Trusted Concrete Contractor</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          With {business.yearsExperience}+ years serving Hernando County, we've built our reputation on quality work, honest pricing, and treating every customer like family.
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-8 mb-12">
+        <div class="bg-white rounded-2xl p-8 shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-xl mb-2">Licensed & Insured</h3>
+              <p class="text-gray-600">
+                We carry Florida State Contractor License #{business.licenseNumber} and maintain full liability and workers' compensation insurance. This protects you from any liability during the project and ensures we meet all state requirements for concrete work.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-8 shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-xl mb-2">No Deposit Required</h3>
+              <p class="text-gray-600">
+                Unlike many contractors, we don't require large upfront deposits. For most residential projects, you pay nothing until the work begins. This shows our confidence in earning your business and completing the job to your satisfaction.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-8 shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-xl mb-2">Detailed Written Quotes</h3>
+              <p class="text-gray-600">
+                Every estimate includes a complete breakdown of materials, labor, permits, and timeline. No vague verbal quotes or surprise charges. You'll know exactly what you're paying for before any work begins, and we honor our quoted prices.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-8 shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-xl mb-2">Experienced Local Crews</h3>
+              <p class="text-gray-600">
+                Our team members live and work in Hernando County. They're not subcontractors from Tampa—they're your neighbors who take pride in their work and understand local building requirements, soil conditions, and what homeowners expect.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-dark text-white rounded-2xl p-8 md:p-10">
+        <div class="grid md:grid-cols-4 gap-8 text-center">
+          <div>
+            <div class="text-4xl font-bold text-primary mb-2">{business.yearsExperience}+</div>
+            <div class="text-gray-400">Years in Business</div>
+          </div>
+          <div>
+            <div class="text-4xl font-bold text-primary mb-2">{business.projectsCompleted}+</div>
+            <div class="text-gray-400">Projects Completed</div>
+          </div>
+          <div>
+            <div class="text-4xl font-bold text-accent mb-2">{business.rating}</div>
+            <div class="text-gray-400">Star Rating</div>
+          </div>
+          <div>
+            <div class="text-4xl font-bold text-primary mb-2">100%</div>
+            <div class="text-gray-400">Satisfaction Guarantee</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Areas Section -->
   <section class="py-16 bg-gray-50">
     <div class="max-w-6xl mx-auto px-5">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold mb-3">Areas We Serve</h2>
-        <p class="text-gray-600">Proudly serving Hernando County, Pasco County, and surrounding communities.</p>
+        <span class="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-sm font-medium mb-4">Service Areas</span>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Areas We Serve</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          Proudly serving Hernando, Pasco, Citrus, and surrounding counties. We travel up to an hour from Spring Hill for concrete projects.
+        </p>
       </div>
       
-      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
-        {serviceAreas.map(area => (
-          <a href={`/locations/${area.slug}/`} 
-             class="flex items-center gap-2 bg-white px-4 py-3 rounded-lg hover:bg-primary hover:text-white transition text-sm font-medium">
-            <svg class="w-4 h-4 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
-            {area.name}
-          </a>
-        ))}
+      <div class="mb-8">
+        <h3 class="font-bold text-lg mb-4 text-center">Primary Service Areas</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {primaryAreas.map(area => (
+            <a href={`/locations/${area.slug}/`} class="flex items-center gap-2 bg-primary text-white px-4 py-3 rounded-lg hover:bg-primary-700 transition text-sm font-medium justify-center">
+              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+              {area.name}
+            </a>
+          ))}
+        </div>
+      </div>
+      
+      <div>
+        <h3 class="font-bold text-lg mb-4 text-center">Extended Service Areas</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
+          {secondaryAreas.map(area => (
+            <a href={`/locations/${area.slug}/`} class="flex items-center gap-2 bg-white px-3 py-2 rounded-lg hover:bg-primary hover:text-white transition text-sm font-medium border border-gray-200">
+              <svg class="w-3 h-3 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+              {area.name}
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   </section>
@@ -281,39 +583,67 @@ const faqSchema = {
   <section class="py-16 bg-white">
     <div class="max-w-4xl mx-auto px-5">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold mb-3">Frequently Asked Questions</h2>
-        <p class="text-gray-600">Common questions about concrete work in Spring Hill, FL.</p>
+        <span class="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-sm font-medium mb-4">FAQ</span>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+        <p class="text-gray-600">Common questions about concrete work in Spring Hill and Hernando County.</p>
       </div>
       
       <div class="space-y-4">
         {faqs.map((faq, i) => (
-          <details class="group bg-gray-50 rounded-xl">
-            <summary class="flex justify-between items-center cursor-pointer p-5 font-semibold list-none">
+          <details class="group bg-gray-50 rounded-xl border border-gray-200" open={i === 0}>
+            <summary class="flex justify-between items-center cursor-pointer p-5 font-semibold list-none hover:bg-gray-100 rounded-xl transition">
               {faq.question}
-              <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </summary>
-            <div class="px-5 pb-5 text-gray-600 -mt-2">
+            <div class="px-5 pb-5 text-gray-600">
               {faq.answer}
             </div>
           </details>
         ))}
       </div>
+      
+      <div class="text-center mt-8">
+        <p class="text-gray-600 mb-2">Have more questions?</p>
+        <a href={business.phoneLink} class="text-primary font-bold text-lg hover:underline">{business.phone}</a>
+      </div>
     </div>
   </section>
 
-  <!-- CTA Section -->
-  <section class="py-16 bg-gradient-to-r from-primary to-orange-600 text-white text-center">
-    <div class="max-w-3xl mx-auto px-5">
-      <h2 class="text-3xl font-bold mb-4">Ready to Start Your Concrete Project?</h2>
-      <p class="text-lg opacity-90 mb-8">Get a free, no-obligation estimate today. Quality work at fair prices.</p>
+  <!-- Final CTA Section -->
+  <section class="py-16 bg-gradient-to-br from-dark to-dark-deep text-white text-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-[url('/images/hero-bg.webp')] opacity-10 bg-cover"></div>
+    <div class="max-w-3xl mx-auto px-5 relative z-10">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Start Your Concrete Project?</h2>
+      <p class="text-lg text-gray-300 mb-8">
+        Get a free, no-obligation estimate from Spring Hill's most trusted concrete contractor. Quality work, fair prices, guaranteed satisfaction.
+      </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href={business.phoneLink} class="inline-flex items-center justify-center gap-3 bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+        <a href={business.phoneLink} class="inline-flex items-center justify-center gap-3 bg-primary hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition shadow-lg">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
           {business.phone}
         </a>
-        <a href="/contact/" class="inline-flex items-center justify-center gap-2 border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-primary transition">
+        <a href="/contact/" class="inline-flex items-center justify-center gap-2 border-2 border-white/50 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white hover:text-dark transition">
           Request Quote Online
         </a>
+      </div>
+      
+      <div class="flex flex-wrap justify-center gap-6 mt-10 text-sm text-gray-400">
+        <span class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+          Licensed & Insured
+        </span>
+        <span class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+          {business.yearsExperience}+ Years Experience
+        </span>
+        <span class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+          5.0 ★ Rating
+        </span>
+        <span class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+          Free Estimates
+        </span>
       </div>
     </div>
   </section>
