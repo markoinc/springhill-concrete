@@ -1,0 +1,382 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { business, services, serviceAreas, faqs, reviews } from '../data/business';
+
+const title = 'Spring Hill Concrete Contractors | Driveways, Patios & Slabs';
+const description = `Spring Hill Concrete Co. - Trusted concrete contractors in Spring Hill, FL. Driveways, patios, slabs, stamped concrete. ${business.yearsExperience}+ years experience. Call ${business.phone} for free estimate.`;
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `${business.url}/#business`,
+  "name": business.name,
+  "telephone": business.phone,
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": business.address.city,
+    "addressRegion": business.address.state,
+    "postalCode": business.address.zip,
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": business.geo.lat,
+    "longitude": business.geo.lng
+  },
+  "url": business.url,
+  "priceRange": business.priceRange,
+  "openingHours": business.hours,
+  "areaServed": serviceAreas.filter(a => a.primary).map(a => ({ "@type": "City", "name": a.name })),
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": business.rating,
+    "reviewCount": business.reviewCount,
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Concrete Services",
+    "itemListElement": services.map(s => ({
+      "@type": "Offer",
+      "itemOffered": { "@type": "Service", "name": s.name }
+    }))
+  }
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(f => ({
+    "@type": "Question",
+    "name": f.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.answer
+    }
+  }))
+};
+---
+
+<Layout title={title} description={description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-dark to-dark-deep py-12 md:py-16 relative overflow-hidden">
+    <div class="absolute inset-0 bg-[url('/images/concrete-texture.jpg')] opacity-5 bg-cover"></div>
+    <div class="max-w-6xl mx-auto px-5 relative z-10">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div class="text-white">
+          <div class="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 px-4 py-2 rounded-full text-sm text-primary mb-5">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+            Rated 5.0 ★ by Spring Hill Homeowners
+          </div>
+          
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-5">
+            <span class="text-primary">Spring Hill's</span> Trusted Concrete Contractors
+          </h1>
+          
+          <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+            Professional concrete driveways, patios, slabs, and stamped concrete. Quality craftsmanship with {business.yearsExperience}+ years of experience serving Hernando County.
+          </p>
+          
+          <div class="flex flex-wrap gap-4 mb-8">
+            <div class="flex items-center gap-2 text-sm">
+              <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              Licensed & Insured
+            </div>
+            <div class="flex items-center gap-2 text-sm">
+              <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              Free Estimates
+            </div>
+            <div class="flex items-center gap-2 text-sm">
+              <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              Quality Guaranteed
+            </div>
+          </div>
+          
+          <a href={business.phoneLink} class="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-lg font-bold text-xl transition shadow-lg shadow-primary/30">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+            {business.phone}
+          </a>
+        </div>
+        
+        <!-- Lead Form Card -->
+        <div class="bg-white rounded-xl p-6 shadow-2xl">
+          <h3 class="text-xl font-bold text-center mb-1">Get Your Free Quote</h3>
+          <p class="text-gray-500 text-sm text-center mb-5">No obligation • Response within 24 hours</p>
+          
+          <form id="lead-form" class="space-y-4">
+            <div>
+              <input type="text" name="name" placeholder="Your Name *" required 
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+            </div>
+            <div>
+              <input type="tel" name="phone" placeholder="Phone Number *" required 
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+            </div>
+            <div>
+              <input type="email" name="email" placeholder="Email Address" 
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+            </div>
+            <div>
+              <select name="service" required 
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none text-gray-600">
+                <option value="">Select Service *</option>
+                {services.map(s => <option value={s.name}>{s.name}</option>)}
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div>
+              <textarea name="message" placeholder="Project Details (optional)" rows="3" 
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none resize-none"></textarea>
+            </div>
+            <button type="submit" 
+              class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-4 rounded-lg transition">
+              Get My Free Quote →
+            </button>
+          </form>
+          
+          <div class="mt-4 bg-amber-50 border border-amber-200 rounded-lg p-3 text-center">
+            <p class="text-sm text-amber-800"><strong>⚡ Limited Availability</strong> — Booking 2-3 weeks out</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Badges -->
+  <section class="bg-gray-50 py-6 border-b">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-dark rounded-full flex items-center justify-center">
+            <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+          </div>
+          <div>
+            <span class="font-semibold block text-sm">Licensed & Insured</span>
+            <span class="text-xs text-gray-500">FL State Licensed</span>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-dark rounded-full flex items-center justify-center">
+            <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+          </div>
+          <div>
+            <span class="font-semibold block text-sm">5.0 Rating</span>
+            <span class="text-xs text-gray-500">{business.reviewCount}+ Reviews</span>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-dark rounded-full flex items-center justify-center">
+            <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
+          </div>
+          <div>
+            <span class="font-semibold block text-sm">{business.yearsExperience}+ Years</span>
+            <span class="text-xs text-gray-500">Experience</span>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-dark rounded-full flex items-center justify-center">
+            <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
+          </div>
+          <div>
+            <span class="font-semibold block text-sm">Free Estimates</span>
+            <span class="text-xs text-gray-500">No Obligation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-3">How It Works</h2>
+        <p class="text-gray-600 max-w-xl mx-auto">Getting quality concrete work is simple. We handle everything from quote to completion.</p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center p-8 bg-gray-50 rounded-xl hover:shadow-lg transition">
+          <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-5">1</div>
+          <h3 class="font-bold text-lg mb-2">Request a Quote</h3>
+          <p class="text-gray-600 text-sm">Call us or fill out the form. We'll discuss your project and schedule a free on-site estimate.</p>
+        </div>
+        
+        <div class="text-center p-8 bg-gray-50 rounded-xl hover:shadow-lg transition">
+          <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-5">2</div>
+          <h3 class="font-bold text-lg mb-2">Get Your Estimate</h3>
+          <p class="text-gray-600 text-sm">We'll assess your needs, explain options, and provide a detailed written quote with no hidden fees.</p>
+        </div>
+        
+        <div class="text-center p-8 bg-gray-50 rounded-xl hover:shadow-lg transition">
+          <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-5">3</div>
+          <h3 class="font-bold text-lg mb-2">Quality Installation</h3>
+          <p class="text-gray-600 text-sm">Our experienced crew completes your project on time, with attention to detail and thorough cleanup.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-3">Our Concrete Services</h2>
+        <p class="text-gray-600 max-w-xl mx-auto">Quality concrete solutions for every project, from driveways to decorative stamped concrete.</p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-8">
+        {services.map(service => (
+          <a href={`/services/${service.slug}/`} class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition">
+            <div class="h-48 bg-gradient-to-br from-dark to-dark-deep flex items-center justify-center">
+              <span class="text-5xl">🏗️</span>
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-xl mb-2 group-hover:text-primary transition">{service.name}</h3>
+              <p class="text-gray-600 mb-4">{service.shortDesc}</p>
+              <span class="text-primary font-semibold text-sm group-hover:underline">Learn More →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-3">What Our Customers Say</h2>
+        <div class="inline-flex items-center gap-2 bg-gray-100 px-6 py-2 rounded-full">
+          <span class="text-primary">★★★★★</span>
+          <span class="font-semibold">{business.rating} Rating</span>
+          <span class="text-gray-500">({business.reviewCount} reviews)</span>
+        </div>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-6">
+        {reviews.map(review => (
+          <div class="bg-gray-50 rounded-xl p-6 border hover:shadow-lg transition">
+            <div class="flex items-center gap-3 mb-4">
+              <div class={`w-12 h-12 ${review.color} rounded-full flex items-center justify-center text-white font-bold text-lg`}>
+                {review.name.charAt(0)}
+              </div>
+              <div>
+                <span class="font-semibold block">{review.name}</span>
+                <span class="text-primary text-sm">★★★★★</span>
+              </div>
+            </div>
+            <p class="text-gray-600 text-sm leading-relaxed">{review.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Areas -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-3">Areas We Serve</h2>
+        <p class="text-gray-600">Proudly serving Hernando County, Pasco County, and surrounding communities.</p>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+        {serviceAreas.map(area => (
+          <a href={`/locations/${area.slug}/`} 
+             class="flex items-center gap-2 bg-white px-4 py-3 rounded-lg hover:bg-primary hover:text-white transition text-sm font-medium">
+            <svg class="w-4 h-4 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+            {area.name}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-5">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-3">Frequently Asked Questions</h2>
+        <p class="text-gray-600">Common questions about concrete work in Spring Hill, FL.</p>
+      </div>
+      
+      <div class="space-y-4">
+        {faqs.map((faq, i) => (
+          <details class="group bg-gray-50 rounded-xl">
+            <summary class="flex justify-between items-center cursor-pointer p-5 font-semibold list-none">
+              {faq.question}
+              <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </summary>
+            <div class="px-5 pb-5 text-gray-600 -mt-2">
+              {faq.answer}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-gradient-to-r from-primary to-orange-600 text-white text-center">
+    <div class="max-w-3xl mx-auto px-5">
+      <h2 class="text-3xl font-bold mb-4">Ready to Start Your Concrete Project?</h2>
+      <p class="text-lg opacity-90 mb-8">Get a free, no-obligation estimate today. Quality work at fair prices.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={business.phoneLink} class="inline-flex items-center justify-center gap-3 bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+          {business.phone}
+        </a>
+        <a href="/contact/" class="inline-flex items-center justify-center gap-2 border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-primary transition">
+          Request Quote Online
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Lead form submission to GHL webhook
+    document.getElementById('lead-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target as HTMLFormElement;
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const originalText = btn.textContent;
+      
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      
+      const formData = new FormData(form);
+      const data = {
+        name: formData.get('name'),
+        phone: formData.get('phone'),
+        email: formData.get('email'),
+        service: formData.get('service'),
+        message: formData.get('message'),
+        source: 'concretespringhill.com',
+        page: window.location.pathname
+      };
+      
+      try {
+        await fetch('https://services.leadconnectorhq.com/hooks/OsNgWuy8oZzLbp5BXbnD/webhook-trigger/5b8e9a2f-c1d4-4e5a-8f6b-7c8d9e0a1b2c', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        
+        form.innerHTML = '<div class="text-center py-8"><div class="text-5xl mb-4">✅</div><h3 class="text-xl font-bold text-green-600 mb-2">Thank You!</h3><p class="text-gray-600">We\'ll contact you within 24 hours.</p></div>';
+      } catch (err) {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        alert('Something went wrong. Please call us directly.');
+      }
+    });
+  </script>
+</Layout>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://concretespringhill.com/sitemap-index.xml

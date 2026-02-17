@@ -1,0 +1,105 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { business, services, serviceAreas } from '../../data/business';
+
+export function getStaticPaths() {
+  return serviceAreas.map(area => ({
+    params: { slug: area.slug },
+    props: { area }
+  }));
+}
+
+const { area } = Astro.props;
+const title = `Concrete Contractors ${area.name}, FL | ${business.name}`;
+const description = `Professional concrete contractors in ${area.name}, ${area.county} County, FL. Driveways, patios, slabs, stamped concrete. Call ${business.phone} for free estimate.`;
+
+const nearbyAreas = serviceAreas
+  .filter(a => a.county === area.county && a.slug !== area.slug)
+  .slice(0, 6);
+---
+
+<Layout title={title} description={description}>
+  <section class="bg-gradient-to-br from-dark to-dark-deep py-16 text-white text-center">
+    <div class="max-w-4xl mx-auto px-5">
+      <h1 class="text-4xl font-bold mb-4">Concrete Contractors in {area.name}, FL</h1>
+      <p class="text-lg text-gray-300 mb-6">Serving {area.name} and all of {area.county} County</p>
+      <a href={business.phoneLink} class="inline-flex items-center gap-3 bg-primary text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary-dark transition">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+        Call {business.phone}
+      </a>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-5">
+      <h2 class="text-2xl font-bold text-dark mb-4">Your Local {area.name} Concrete Contractors</h2>
+      <p class="text-gray-600 mb-6">
+        {business.name} is proud to serve homeowners and businesses in {area.name}, Florida. Whether you need a new driveway, patio, slab, or decorative stamped concrete, our experienced team delivers quality results at competitive prices.
+      </p>
+      <p class="text-gray-600 mb-6">
+        As a locally-owned company, we understand the unique needs of {area.county} County properties. Florida's climate requires proper concrete installation techniques, and we use high-quality materials designed to withstand our heat, humidity, and occasional storms.
+      </p>
+
+      <h3 class="text-xl font-bold text-dark mb-4">Our Services in {area.name}</h3>
+      <div class="grid md:grid-cols-2 gap-4 mb-8">
+        {services.map(service => (
+          <a href={`/services/${service.slug}/`} class="flex items-start gap-3 bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition">
+            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            <div>
+              <h4 class="font-semibold">{service.name}</h4>
+              <p class="text-sm text-gray-600">{service.shortDesc}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <h3 class="text-xl font-bold text-dark mb-4">Why Choose Us in {area.name}?</h3>
+      <ul class="space-y-3 mb-8">
+        <li class="flex items-center gap-3">
+          <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+          <span>Licensed and insured in Florida</span>
+        </li>
+        <li class="flex items-center gap-3">
+          <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+          <span>{business.yearsExperience}+ years of concrete experience</span>
+        </li>
+        <li class="flex items-center gap-3">
+          <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+          <span>Free, no-obligation estimates</span>
+        </li>
+        <li class="flex items-center gap-3">
+          <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+          <span>Quality materials, professional workmanship</span>
+        </li>
+        <li class="flex items-center gap-3">
+          <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+          <span>We handle permits and inspections</span>
+        </li>
+      </ul>
+
+      {nearbyAreas.length > 0 && (
+        <>
+          <h3 class="text-xl font-bold text-dark mb-4">Nearby Areas We Serve</h3>
+          <div class="flex flex-wrap gap-2">
+            {nearbyAreas.map(nearby => (
+              <a href={`/locations/${nearby.slug}/`} class="bg-gray-100 hover:bg-primary hover:text-white px-4 py-2 rounded-full text-sm transition">
+                {nearby.name}
+              </a>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  </section>
+
+  <section class="py-16 bg-gradient-to-r from-primary to-orange-600 text-white text-center">
+    <div class="max-w-3xl mx-auto px-5">
+      <h2 class="text-3xl font-bold mb-4">Get Your Free Estimate in {area.name}</h2>
+      <p class="text-lg opacity-90 mb-8">Call today for a no-obligation quote on your concrete project.</p>
+      <a href={business.phoneLink} class="inline-flex items-center gap-3 bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+        {business.phone}
+      </a>
+    </div>
+  </section>
+</Layout>

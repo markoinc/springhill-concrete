@@ -1,0 +1,85 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { business } from '../data/business';
+
+const title = `Privacy Policy | ${business.name}`;
+const description = `Privacy policy for ${business.name}. Learn how we collect, use, and protect your information.`;
+---
+
+<Layout title={title} description={description}>
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-5">
+      <h1 class="text-3xl font-bold mb-8">Privacy Policy</h1>
+      <p class="text-gray-500 mb-8">Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+
+      <div class="prose prose-gray max-w-none">
+        <h2 class="text-xl font-bold mt-8 mb-4">Information We Collect</h2>
+        <p class="mb-4 text-gray-600">
+          When you contact {business.name} through our website or by phone, we may collect:
+        </p>
+        <ul class="list-disc pl-6 mb-6 text-gray-600 space-y-2">
+          <li>Your name and contact information (phone number, email address)</li>
+          <li>Service address or project location</li>
+          <li>Details about your concrete project</li>
+          <li>Communications between you and our team</li>
+        </ul>
+
+        <h2 class="text-xl font-bold mt-8 mb-4">How We Use Your Information</h2>
+        <p class="mb-4 text-gray-600">
+          We use the information we collect to:
+        </p>
+        <ul class="list-disc pl-6 mb-6 text-gray-600 space-y-2">
+          <li>Respond to your inquiries and provide estimates</li>
+          <li>Schedule and complete concrete work</li>
+          <li>Communicate with you about your project</li>
+          <li>Improve our services</li>
+          <li>Send occasional updates about our services (with your consent)</li>
+        </ul>
+
+        <h2 class="text-xl font-bold mt-8 mb-4">Information Sharing</h2>
+        <p class="mb-4 text-gray-600">
+          We do not sell, trade, or rent your personal information to third parties. We may share information with:
+        </p>
+        <ul class="list-disc pl-6 mb-6 text-gray-600 space-y-2">
+          <li>Service providers who assist us (e.g., scheduling software, CRM systems)</li>
+          <li>When required by law or to protect our rights</li>
+        </ul>
+
+        <h2 class="text-xl font-bold mt-8 mb-4">Cookies and Tracking</h2>
+        <p class="mb-4 text-gray-600">
+          Our website may use cookies and similar technologies to improve your browsing experience and analyze site traffic. You can control cookies through your browser settings.
+        </p>
+
+        <h2 class="text-xl font-bold mt-8 mb-4">Data Security</h2>
+        <p class="mb-4 text-gray-600">
+          We implement appropriate security measures to protect your personal information. However, no method of transmission over the Internet is 100% secure.
+        </p>
+
+        <h2 class="text-xl font-bold mt-8 mb-4">Your Rights</h2>
+        <p class="mb-4 text-gray-600">
+          You have the right to:
+        </p>
+        <ul class="list-disc pl-6 mb-6 text-gray-600 space-y-2">
+          <li>Request access to your personal information</li>
+          <li>Request correction or deletion of your data</li>
+          <li>Opt out of marketing communications</li>
+        </ul>
+
+        <h2 class="text-xl font-bold mt-8 mb-4">Contact Us</h2>
+        <p class="mb-4 text-gray-600">
+          If you have questions about this privacy policy or your personal information, contact us at:
+        </p>
+        <p class="text-gray-600">
+          <strong>{business.name}</strong><br>
+          {business.address.full}<br>
+          Phone: <a href={business.phoneLink} class="text-primary hover:underline">{business.phone}</a>
+        </p>
+
+        <h2 class="text-xl font-bold mt-8 mb-4">Changes to This Policy</h2>
+        <p class="mb-4 text-gray-600">
+          We may update this privacy policy from time to time. Changes will be posted on this page with an updated effective date.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

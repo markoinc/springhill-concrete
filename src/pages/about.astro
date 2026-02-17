@@ -1,0 +1,133 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { business, services, serviceAreas } from '../data/business';
+
+const title = `About | ${business.name}`;
+const description = `Learn about ${business.name} - your trusted local concrete contractors with ${business.yearsExperience}+ years experience serving Spring Hill and Hernando County, FL.`;
+
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `${business.url}/#business`,
+  "name": business.name,
+  "telephone": business.phone,
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": business.address.city,
+    "addressRegion": business.address.state,
+    "postalCode": business.address.zip,
+    "addressCountry": "US"
+  },
+  "url": `${business.url}/about/`,
+  "foundingDate": business.foundedYear.toString(),
+  "description": `${business.name} is a locally owned concrete contracting company serving Spring Hill and Hernando County, FL since ${business.foundedYear}. We specialize in residential concrete services including driveways, patios, slabs, and decorative stamped concrete.`
+};
+---
+
+<Layout title={title} description={description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(aboutSchema)} />
+  </Fragment>
+
+  <section class="bg-gradient-to-br from-dark to-dark-deep py-16 text-white text-center">
+    <div class="max-w-4xl mx-auto px-5">
+      <h1 class="text-4xl font-bold mb-4">About {business.name}</h1>
+      <p class="text-lg text-gray-300">Your trusted concrete contractors in Spring Hill, FL</p>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-5">
+      <div class="grid md:grid-cols-2 gap-12 items-start mb-12">
+        <div>
+          <h2 class="text-2xl font-bold text-dark mb-4">Who We Are</h2>
+          <p class="text-gray-600 mb-4">
+            {business.name} is a locally owned and operated concrete contracting company serving Spring Hill, FL and the surrounding Hernando County area. With {business.yearsExperience}+ years of combined experience in the concrete industry, we've built our reputation on quality workmanship, honest pricing, and excellent customer service.
+          </p>
+          <p class="text-gray-600 mb-4">
+            We understand that your home is your biggest investment. That's why we treat every project—big or small—with the same attention to detail and commitment to excellence. From a simple equipment pad to a complete driveway replacement, we deliver results you can be proud of.
+          </p>
+          <p class="text-gray-600">
+            As a local business, we're part of this community. Our reputation matters to us, and we work hard to earn your trust and referrals.
+          </p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-8">
+          <h3 class="font-bold text-lg mb-4">Why Choose Us?</h3>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              <div>
+                <strong class="block">Licensed & Insured</strong>
+                <span class="text-sm text-gray-600">Fully licensed in Florida with liability insurance</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              <div>
+                <strong class="block">{business.yearsExperience}+ Years Experience</strong>
+                <span class="text-sm text-gray-600">Proven expertise in all types of concrete work</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              <div>
+                <strong class="block">Free Estimates</strong>
+                <span class="text-sm text-gray-600">No-obligation quotes with upfront pricing</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              <div>
+                <strong class="block">Quality Materials</strong>
+                <span class="text-sm text-gray-600">4,000 PSI concrete and proper reinforcement</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              <div>
+                <strong class="block">Local & Reliable</strong>
+                <span class="text-sm text-gray-600">We live and work in this community</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold text-dark mb-6">Our Services</h2>
+      <div class="grid md:grid-cols-2 gap-6 mb-12">
+        {services.map(service => (
+          <a href={`/services/${service.slug}/`} class="flex items-start gap-4 bg-gray-50 p-5 rounded-lg hover:bg-gray-100 transition">
+            <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center text-white text-2xl flex-shrink-0">🏗️</div>
+            <div>
+              <h3 class="font-bold mb-1">{service.name}</h3>
+              <p class="text-sm text-gray-600">{service.shortDesc}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <h2 class="text-2xl font-bold text-dark mb-6">Areas We Serve</h2>
+      <p class="text-gray-600 mb-4">
+        We're proud to serve homeowners throughout Hernando County, Pasco County, and Citrus County including:
+      </p>
+      <div class="flex flex-wrap gap-2 mb-8">
+        {serviceAreas.map(area => (
+          <a href={`/locations/${area.slug}/`} class="bg-gray-100 hover:bg-primary hover:text-white px-3 py-1 rounded-full text-sm transition">
+            {area.name}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-gradient-to-r from-primary to-orange-600 text-white text-center">
+    <div class="max-w-3xl mx-auto px-5">
+      <h2 class="text-3xl font-bold mb-4">Ready to Get Started?</h2>
+      <p class="text-lg opacity-90 mb-8">Contact us today for a free, no-obligation estimate.</p>
+      <a href={business.phoneLink} class="inline-flex items-center gap-3 bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+        {business.phone}
+      </a>
+    </div>
+  </section>
+</Layout>

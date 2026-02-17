@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { business, serviceAreas } from '../../data/business';
+
+const title = 'Service Areas | Spring Hill Concrete Co.';
+const description = `Concrete contractors serving Spring Hill, Brooksville, Weeki Wachee, Hudson, and all of Hernando & Pasco Counties. Call ${business.phone}.`;
+
+const counties = [...new Set(serviceAreas.map(a => a.county))];
+---
+
+<Layout title={title} description={description}>
+  <section class="bg-gradient-to-br from-dark to-dark-deep py-16 text-white text-center">
+    <div class="max-w-4xl mx-auto px-5">
+      <h1 class="text-4xl font-bold mb-4">Areas We Serve</h1>
+      <p class="text-lg text-gray-300">Proudly serving Hernando County, Pasco County, and Citrus County</p>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="text-center mb-12">
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          {business.name} provides professional concrete services throughout the greater Spring Hill area. 
+          We're locally owned and operated, so we know these communities well.
+        </p>
+      </div>
+
+      {counties.map(county => (
+        <div class="mb-12">
+          <h2 class="text-2xl font-bold mb-6 border-b pb-3">{county} County</h2>
+          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            {serviceAreas.filter(a => a.county === county).map(area => (
+              <a href={`/locations/${area.slug}/`} 
+                 class="flex items-center gap-2 bg-gray-50 px-4 py-3 rounded-lg hover:bg-primary hover:text-white transition font-medium">
+                <svg class="w-4 h-4 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+                {area.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <div class="bg-gray-50 rounded-xl p-8 text-center mt-12">
+        <h3 class="text-xl font-bold mb-3">Don't See Your Area?</h3>
+        <p class="text-gray-600 mb-4">We may still be able to help! Give us a call to discuss your project.</p>
+        <a href={business.phoneLink} class="inline-flex items-center gap-3 bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+          {business.phone}
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

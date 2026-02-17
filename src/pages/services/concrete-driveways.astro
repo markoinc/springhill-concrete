@@ -1,0 +1,164 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { business, services } from '../../data/business';
+
+const service = services.find(s => s.slug === 'concrete-driveways')!;
+const title = `Concrete Driveway Contractors Spring Hill FL | ${business.name}`;
+const description = `Expert concrete driveway contractors in Spring Hill, FL. New driveways, resurfacing, repairs. 4" thick, 4000 PSI concrete. Call ${business.phone} for free estimate.`;
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does a concrete driveway cost in Spring Hill, FL?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Concrete driveway costs in Spring Hill range from $8-$15 per square foot. A standard 400 sq ft single-car driveway costs $3,200-$6,000. Two-car driveways (600 sq ft) cost $4,800-$9,000. Stamped driveways cost 40-60% more."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How thick should a concrete driveway be in Florida?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A residential driveway should be 4 inches thick minimum for cars and light trucks. For RVs, boats, or heavy vehicles, we recommend 5-6 inches. We use 4,000 PSI concrete with wire mesh or fiber reinforcement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long until I can drive on my new concrete driveway?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Wait 7 days before driving passenger vehicles on new concrete. Heavy vehicles should wait 28 days. You can walk on it after 24-48 hours. Florida's warm climate helps concrete cure faster."
+      }
+    }
+  ]
+};
+---
+
+<Layout title={title} description={description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
+
+  <section class="bg-gradient-to-br from-dark to-dark-deep py-16 text-white text-center">
+    <div class="max-w-4xl mx-auto px-5">
+      <h1 class="text-4xl font-bold mb-4">Concrete Driveway Contractors</h1>
+      <p class="text-lg text-gray-300 mb-6">Professional driveway installation in Spring Hill, FL and Hernando County</p>
+      <a href={business.phoneLink} class="inline-flex items-center gap-3 bg-primary text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary-dark transition">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+        Call {business.phone}
+      </a>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-5">
+      <div class="prose prose-lg max-w-none">
+        <h2 class="text-2xl font-bold text-dark mb-4">Expert Concrete Driveway Installation in Spring Hill</h2>
+        <p class="text-gray-600 mb-6">
+          A quality concrete driveway is one of the best investments you can make in your Spring Hill home. Not only does it boost curb appeal, but a properly installed driveway lasts 30+ years with minimal maintenance. At {business.name}, we specialize in durable, beautiful concrete driveways built to withstand Florida's heat and occasional storms.
+        </p>
+
+        <h3 class="text-xl font-bold text-dark mb-3">Our Driveway Services Include:</h3>
+        <ul class="grid md:grid-cols-2 gap-3 mb-8 list-none pl-0">
+          {service.features.map(f => (
+            <li class="flex items-center gap-2 bg-gray-50 p-3 rounded-lg">
+              <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              {f}
+            </li>
+          ))}
+        </ul>
+
+        <h3 class="text-xl font-bold text-dark mb-3">Why Choose Concrete for Your Driveway?</h3>
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+          <div class="bg-gray-50 p-5 rounded-lg">
+            <h4 class="font-bold mb-2">Durability</h4>
+            <p class="text-gray-600 text-sm">Concrete driveways last 30+ years vs. 15-20 for asphalt. Less maintenance required.</p>
+          </div>
+          <div class="bg-gray-50 p-5 rounded-lg">
+            <h4 class="font-bold mb-2">Curb Appeal</h4>
+            <p class="text-gray-600 text-sm">Clean, professional appearance. Multiple finish options available.</p>
+          </div>
+          <div class="bg-gray-50 p-5 rounded-lg">
+            <h4 class="font-bold mb-2">Low Maintenance</h4>
+            <p class="text-gray-600 text-sm">No resealing required like asphalt. Easy to clean with a pressure washer.</p>
+          </div>
+          <div class="bg-gray-50 p-5 rounded-lg">
+            <h4 class="font-bold mb-2">Property Value</h4>
+            <p class="text-gray-600 text-sm">A new concrete driveway can increase your home's value and selling appeal.</p>
+          </div>
+        </div>
+
+        <h3 class="text-xl font-bold text-dark mb-3">Concrete Driveway Cost in Spring Hill</h3>
+        <p class="text-gray-600 mb-4">
+          Expect to pay $8-$15 per square foot for a standard concrete driveway in Spring Hill. Here's a quick cost guide:
+        </p>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full border-collapse bg-gray-50 rounded-lg overflow-hidden text-sm">
+            <thead>
+              <tr class="bg-dark text-white">
+                <th class="p-3 text-left">Driveway Size</th>
+                <th class="p-3 text-left">Sq. Ft.</th>
+                <th class="p-3 text-left">Cost Range</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b"><td class="p-3">Single Car</td><td class="p-3">300-400</td><td class="p-3">$2,400-$6,000</td></tr>
+              <tr class="border-b"><td class="p-3">Two Car</td><td class="p-3">500-700</td><td class="p-3">$4,000-$10,500</td></tr>
+              <tr><td class="p-3">Large/Circular</td><td class="p-3">800-1200</td><td class="p-3">$6,400-$18,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-5">
+      <h2 class="text-2xl font-bold text-center mb-8">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        <details class="group bg-white rounded-xl shadow-sm">
+          <summary class="flex justify-between items-center cursor-pointer p-5 font-semibold list-none">
+            How much does a concrete driveway cost in Spring Hill, FL?
+            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-5 pb-5 text-gray-600">
+            Concrete driveway costs in Spring Hill range from $8-$15 per square foot. A standard 400 sq ft single-car driveway costs $3,200-$6,000. Two-car driveways (600 sq ft) cost $4,800-$9,000. Stamped driveways cost 40-60% more.
+          </div>
+        </details>
+        <details class="group bg-white rounded-xl shadow-sm">
+          <summary class="flex justify-between items-center cursor-pointer p-5 font-semibold list-none">
+            How thick should a concrete driveway be in Florida?
+            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-5 pb-5 text-gray-600">
+            A residential driveway should be 4 inches thick minimum for cars and light trucks. For RVs, boats, or heavy vehicles, we recommend 5-6 inches. We use 4,000 PSI concrete with wire mesh or fiber reinforcement.
+          </div>
+        </details>
+        <details class="group bg-white rounded-xl shadow-sm">
+          <summary class="flex justify-between items-center cursor-pointer p-5 font-semibold list-none">
+            How long until I can drive on my new concrete driveway?
+            <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-5 pb-5 text-gray-600">
+            Wait 7 days before driving passenger vehicles on new concrete. Heavy vehicles should wait 28 days. You can walk on it after 24-48 hours. Florida's warm climate helps concrete cure faster.
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-gradient-to-r from-primary to-orange-600 text-white text-center">
+    <div class="max-w-3xl mx-auto px-5">
+      <h2 class="text-3xl font-bold mb-4">Get Your Free Driveway Estimate</h2>
+      <p class="text-lg opacity-90 mb-8">Call now or request a quote online. No obligation.</p>
+      <a href={business.phoneLink} class="inline-flex items-center gap-3 bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+        {business.phone}
+      </a>
+    </div>
+  </section>
+</Layout>

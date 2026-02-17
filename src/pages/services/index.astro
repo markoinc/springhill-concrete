@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { business, services } from '../../data/business';
+
+const title = 'Concrete Services | Spring Hill Concrete Co.';
+const description = `Professional concrete services in Spring Hill, FL. Driveways, patios, slabs, stamped concrete. ${business.yearsExperience}+ years experience. Call ${business.phone}.`;
+---
+
+<Layout title={title} description={description}>
+  <section class="bg-gradient-to-br from-dark to-dark-deep py-16 text-white text-center">
+    <div class="max-w-4xl mx-auto px-5">
+      <h1 class="text-4xl font-bold mb-4">Our Concrete Services</h1>
+      <p class="text-lg text-gray-300">Professional concrete solutions for every project in Spring Hill and surrounding areas.</p>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="grid md:grid-cols-2 gap-10">
+        {services.map(service => (
+          <div class="bg-gray-50 rounded-xl overflow-hidden">
+            <div class="h-48 bg-gradient-to-br from-dark to-dark-deep flex items-center justify-center">
+              <span class="text-6xl">🏗️</span>
+            </div>
+            <div class="p-8">
+              <h2 class="text-2xl font-bold mb-3">{service.name}</h2>
+              <p class="text-gray-600 mb-4">{service.description}</p>
+              <ul class="space-y-2 mb-6">
+                {service.features.slice(0, 4).map(f => (
+                  <li class="flex items-center gap-2 text-sm text-gray-600">
+                    <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <a href={`/services/${service.slug}/`} class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition">
+                Learn More →
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-gradient-to-r from-primary to-orange-600 text-white text-center">
+    <div class="max-w-3xl mx-auto px-5">
+      <h2 class="text-3xl font-bold mb-4">Ready to Get Started?</h2>
+      <p class="text-lg opacity-90 mb-8">Call now for a free estimate on your concrete project.</p>
+      <a href={business.phoneLink} class="inline-flex items-center gap-3 bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+        {business.phone}
+      </a>
+    </div>
+  </section>
+</Layout>

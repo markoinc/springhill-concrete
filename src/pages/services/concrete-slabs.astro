@@ -1,0 +1,82 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { business, services } from '../../data/business';
+
+const service = services.find(s => s.slug === 'concrete-slabs')!;
+const title = `Concrete Slab Contractors Spring Hill FL | ${business.name}`;
+const description = `Professional concrete slab installation in Spring Hill, FL. Garage slabs, shed pads, equipment foundations. Call ${business.phone} for free estimate.`;
+---
+
+<Layout title={title} description={description}>
+  <section class="bg-gradient-to-br from-dark to-dark-deep py-16 text-white text-center">
+    <div class="max-w-4xl mx-auto px-5">
+      <h1 class="text-4xl font-bold mb-4">Concrete Slab Contractors</h1>
+      <p class="text-lg text-gray-300 mb-6">Strong foundations for sheds, garages, and more</p>
+      <a href={business.phoneLink} class="inline-flex items-center gap-3 bg-primary text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary-dark transition">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+        Call {business.phone}
+      </a>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-5">
+      <h2 class="text-2xl font-bold text-dark mb-4">Concrete Slab Installation in Spring Hill</h2>
+      <p class="text-gray-600 mb-6">
+        A quality concrete slab provides the stable foundation your project needs. Whether you're building a backyard shed, detached garage, workshop, or need an equipment pad, {business.name} delivers professional results that last.
+      </p>
+
+      <h3 class="text-xl font-bold text-dark mb-3">Slab Installation Features:</h3>
+      <ul class="grid md:grid-cols-2 gap-3 mb-8">
+        {service.features.map(f => (
+          <li class="flex items-center gap-2 bg-gray-50 p-3 rounded-lg">
+            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            {f}
+          </li>
+        ))}
+      </ul>
+
+      <h3 class="text-xl font-bold text-dark mb-3">Common Slab Projects</h3>
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-gray-50 p-5 rounded-lg">
+          <h4 class="font-bold mb-2">🏠 Shed & Storage Building Pads</h4>
+          <p class="text-gray-600 text-sm">Level, reinforced slabs for prefab sheds and storage buildings. Typically 4" thick.</p>
+        </div>
+        <div class="bg-gray-50 p-5 rounded-lg">
+          <h4 class="font-bold mb-2">🚗 Garage Floors</h4>
+          <p class="text-gray-600 text-sm">Heavy-duty slabs for detached garages and workshops. 4-6" thick with rebar.</p>
+        </div>
+        <div class="bg-gray-50 p-5 rounded-lg">
+          <h4 class="font-bold mb-2">❄️ AC Equipment Pads</h4>
+          <p class="text-gray-600 text-sm">Small pads for HVAC units, generators, and pool equipment. Level and stable.</p>
+        </div>
+        <div class="bg-gray-50 p-5 rounded-lg">
+          <h4 class="font-bold mb-2">🚤 RV & Boat Pads</h4>
+          <p class="text-gray-600 text-sm">Extra thick slabs to support heavy recreational vehicles. 5-6" reinforced.</p>
+        </div>
+      </div>
+
+      <h3 class="text-xl font-bold text-dark mb-3">Concrete Slab Cost Estimates</h3>
+      <p class="text-gray-600 mb-4">
+        Slab costs vary by size and thickness. Here's what to expect in Spring Hill:
+      </p>
+      <ul class="list-disc pl-6 mb-8 text-gray-600 space-y-2">
+        <li><strong>Small pad (50-100 sq ft):</strong> $500-$1,500</li>
+        <li><strong>Shed slab (100-200 sq ft):</strong> $1,000-$3,000</li>
+        <li><strong>Garage slab (400-600 sq ft):</strong> $3,200-$9,000</li>
+        <li><strong>Workshop (600-1000 sq ft):</strong> $4,800-$15,000</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-16 bg-gradient-to-r from-primary to-orange-600 text-white text-center">
+    <div class="max-w-3xl mx-auto px-5">
+      <h2 class="text-3xl font-bold mb-4">Need a Concrete Slab?</h2>
+      <p class="text-lg opacity-90 mb-8">Get a free estimate for your project.</p>
+      <a href={business.phoneLink} class="inline-flex items-center gap-3 bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+        {business.phone}
+      </a>
+    </div>
+  </section>
+</Layout>
