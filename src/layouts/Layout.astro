@@ -66,13 +66,7 @@ const { title, description = `Professional concrete contractors in Spring Hill, 
   <header class="bg-white shadow-sm sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-5 py-4 flex justify-between items-center">
       <a href="/" class="flex items-center gap-2">
-        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-        </div>
-        <div>
-          <span class="font-bold text-lg text-dark leading-tight block">{business.name}</span>
-          <span class="text-xs text-gray-500">Hernando County's Trusted Contractor</span>
-        </div>
+        <img src="/images/springhill-logo.png" alt="Spring Hill Concrete Co. Logo" class="h-14 w-auto" />
       </a>
       
       <nav class="hidden lg:flex items-center gap-8">
@@ -116,10 +110,7 @@ const { title, description = `Professional concrete contractors in Spring Hill, 
       <div class="grid md:grid-cols-4 gap-8 mb-12">
         <div class="md:col-span-2">
           <div class="flex items-center gap-2 mb-4">
-            <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-            </div>
-            <span class="font-bold text-xl">{business.name}</span>
+            <img src="/images/springhill-logo.png" alt="Spring Hill Concrete Co. Logo" class="h-16 w-auto bg-white rounded-lg p-1" />
           </div>
           <p class="text-gray-400 mb-4 max-w-md">
             Professional concrete contractors serving Spring Hill, FL and surrounding areas since {business.foundedYear}. Quality workmanship, fair prices, and customer satisfaction guaranteed.
@@ -162,13 +153,19 @@ const { title, description = `Professional concrete contractors in Spring Hill, 
         </div>
       </div>
       
-      <div class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="border-t border-gray-700 pt-8">
+        <div class="flex flex-col items-center gap-4 mb-6">
+          <p class="text-gray-400 text-sm">This Website Is Powered By</p>
+          <img src="/images/aci-enterprise.webp" alt="ACI Enterprise LLC" class="h-8 w-auto" />
+        </div>
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
         <p class="text-gray-400 text-sm">
           © {new Date().getFullYear()} {business.name}. All rights reserved. Licensed & Insured.
         </p>
         <div class="flex gap-6 text-sm text-gray-400">
           <a href="/privacy/" class="hover:text-white transition">Privacy Policy</a>
           <a href="/terms/" class="hover:text-white transition">Terms of Service</a>
+        </div>
         </div>
       </div>
     </div>

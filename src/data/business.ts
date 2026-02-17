@@ -19,8 +19,8 @@ export const business = {
   priceRange: '$$',
   rating: 5.0,
   reviewCount: 47,
-  foundedYear: 2010,
-  yearsExperience: 15,
+  foundedYear: 1985,
+  yearsExperience: 40,
   projectsCompleted: 850,
   licenseNumber: 'CRC1331876'
 };
@@ -201,9 +201,9 @@ export const reviews = [
 ];
 
 export const trustBadges = [
-  { title: 'Licensed', subtitle: 'FL State #CRC1331876', icon: 'shield' },
+  { title: 'Licensed', subtitle: 'FL State', icon: 'shield' },
   { title: 'Fully Insured', subtitle: '$1M Liability', icon: 'certificate' },
-  { title: '15+ Years', subtitle: 'Experience', icon: 'clock' },
+  { title: '40+ Years', subtitle: 'Experience', icon: 'clock' },
   { title: '5.0 Rating', subtitle: '47+ Reviews', icon: 'star' },
   { title: '850+ Projects', subtitle: 'Completed', icon: 'check' },
   { title: 'Free Estimates', subtitle: 'No Obligation', icon: 'calculator' }
