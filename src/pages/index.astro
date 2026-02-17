@@ -66,7 +66,7 @@ const faqSchema = {
 
   <!-- Hero Section -->
   <section class="bg-gradient-to-br from-dark to-dark-deep py-12 md:py-16 relative overflow-hidden">
-    <div class="absolute inset-0 bg-[url('/images/concrete-texture.jpg')] opacity-5 bg-cover"></div>
+    <div class="absolute inset-0 bg-[url("/images/hero-bg.webp")] opacity-20 bg-cover"></div>
     <div class="max-w-6xl mx-auto px-5 relative z-10">
       <div class="grid md:grid-cols-2 gap-10 items-center">
         <div class="text-white">
@@ -212,8 +212,8 @@ const faqSchema = {
       <div class="grid md:grid-cols-2 gap-8">
         {services.map(service => (
           <a href={`/services/${service.slug}/`} class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition">
-            <div class="h-48 bg-gradient-to-br from-dark to-dark-deep flex items-center justify-center">
-              <span class="text-5xl">🏗️</span>
+            <div class="h-48 relative overflow-hidden">
+              <img src={`/images/${service.slug === "concrete-driveways" ? "driveway-bighouse" : service.slug === "concrete-patios" ? "concrete-patio" : service.slug === "concrete-slabs" ? "concrete-slab" : "stamped-driveway"}.webp`} alt={service.name} class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
             </div>
             <div class="p-6">
               <h3 class="font-bold text-xl mb-2 group-hover:text-primary transition">{service.name}</h3>
