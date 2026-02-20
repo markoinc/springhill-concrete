@@ -31,10 +31,26 @@ const { title, description = `Professional concrete contractors in Spring Hill, 
   <style is:global>
     html { scroll-behavior: smooth; }
     body { font-family: 'Inter', system-ui, sans-serif; }
-    .sticky-cta-mobile { display: none; }
+
+    /* Sticky mobile CTA — hidden on desktop, visible on mobile */
+    .sticky-cta-mobile {
+      display: none;
+    }
     @media (max-width: 768px) {
-      .sticky-cta-mobile { display: flex; }
-      body { padding-bottom: 70px; }
+      .sticky-cta-mobile {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 9999;
+        /* Safe area for iPhone home indicator */
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      body {
+        padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+      }
     }
   </style>
 </head>
@@ -172,10 +188,13 @@ const { title, description = `Professional concrete contractors in Spring Hill, 
   </footer>
 
   <!-- Sticky Mobile CTA -->
-  <div class="sticky-cta-mobile fixed bottom-0 left-0 right-0 bg-primary shadow-lg border-t border-primary-700 z-50">
-    <a href={business.phoneLink} class="flex items-center justify-center gap-3 py-4 text-white font-bold text-lg">
-      <svg class="w-6 h-6 animate-pulse" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
-      Call Now: {business.phone}
+  <div class="sticky-cta-mobile bg-primary shadow-lg border-t-2 border-primary-700">
+    <a 
+      href={business.phoneLink}
+      style="display:flex;align-items:center;justify-content:center;gap:12px;padding:16px 20px;width:100%;color:#fff;font-weight:700;font-size:1.1rem;text-decoration:none;"
+    >
+      <svg style="width:24px;height:24px;flex-shrink:0;" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+      <span>Call Now: {business.phone}</span>
     </a>
   </div>
 </body>
